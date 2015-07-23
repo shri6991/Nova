@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="10dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        style="@style/FloatingTextView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:animateLayoutChanges="true">
+
+        <EditText
+            android:id="@+id/searchBox"
+            style="@style/FloatingTextView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true"
+            android:layout_margin="1dp"
+            android:layout_toLeftOf="@+id/searchDivider"
+            android:elevation="0dp"
+            android:hint="Enter a search term"
+            android:translationZ="0dp" />
+
+        <View
+            android:id="@+id/searchDivider"
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/bSearch"
+            android:alpha="0.2"
+            android:background="@color/Black" />
+
+        <ImageView
+            android:id="@+id/bSearch"
+            style="@style/FloatingTextView"
+            android:layout_width="47dp"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="1dp"
+            android:alpha="0.5"
+            android:clickable="true"
+            android:elevation="0dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_search_black_48dp"
+            android:translationZ="0dp" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/searchListView"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:animateLayoutChanges="true" />
+</LinearLayout>

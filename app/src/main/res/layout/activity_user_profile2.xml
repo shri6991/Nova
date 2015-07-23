@@ -1,0 +1,625 @@
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout_userprofile2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/app_bar"
+            layout="@layout/app_bar" />
+
+        <ScrollView
+            style="@style/CardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/app_bar"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:scrollbarSize="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/pd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="55dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_toLeftOf="@+id/pdedit"
+                        android:gravity="center"
+                        android:text="PROFESSIONAL DETAILS"
+                        android:textColor="@color/colorTextSecondary"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/pdedit"
+                        android:layout_width="45dp"
+                        android:layout_height="55dp"
+                        android:layout_toLeftOf="@+id/pddown"
+                        android:alpha="0.5"
+                        android:clickable="true"
+                        android:onClick="editProfessional"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_mode_edit_black_48dp" />
+
+                    <ImageView
+                        android:id="@+id/pddown"
+                        android:layout_width="40dp"
+                        android:layout_height="55dp"
+                        android:layout_alignParentRight="true"
+                        android:alpha="0.6"
+                        android:clickable="true"
+                        android:onClick="arrowPressed"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_keyboard_arrow_up_black_48dp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray" />
+
+                <LinearLayout
+                    android:id="@+id/llviewprof"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/workPosition"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:gravity="center"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/workExperience"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:gravity="center"
+                        android:textSize="17sp" />
+
+
+                    <TextView
+                        android:id="@+id/workCurloc"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:gravity="center"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/workDesloc"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginBottom="0dp"
+                        android:gravity="center"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lleditprof"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <EditText
+                        android:id="@+id/editPosition"
+                        style="@style/FloatingTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:elevation="0dp"
+                        android:translationZ="0dp" />
+
+                    <EditText
+                        android:id="@+id/editExperience"
+                        style="@style/FloatingTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:elevation="0dp"
+                        android:translationZ="0dp" />
+
+                    <EditText
+                        android:id="@+id/editCurloc"
+                        style="@style/FloatingTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:elevation="0dp"
+                        android:translationZ="0dp" />
+
+                    <EditText
+                        android:id="@+id/editDesloc"
+                        style="@style/FloatingTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:elevation="0dp"
+                        android:translationZ="0dp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <Button
+                            android:id="@+id/bSaveEdit"
+                            style="@style/FloatingTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="20dp"
+                            android:clickable="true"
+                            android:elevation="0dp"
+                            android:text="SAVE"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="16sp"
+                            android:translationZ="0dp" />
+
+                        <Button
+                            android:id="@+id/bDiscardEdit"
+                            style="@style/FloatingTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginRight="20dp"
+                            android:clickable="true"
+                            android:elevation="0dp"
+                            android:text="DISCARD"
+                            android:textColor="@color/colorAccentDark"
+                            android:textSize="16sp"
+                            android:translationZ="0dp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/workHistoryRel"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray" />
+
+                    <TextView
+                        android:id="@+id/wh"
+                        android:layout_width="fill_parent"
+                        android:layout_height="55dp"
+                        android:layout_gravity="left"
+                        android:layout_marginBottom="0dp"
+                        android:layout_toLeftOf="@+id/whdown"
+                        android:gravity="center"
+                        android:text="WORK HISTORY"
+                        android:textColor="@color/colorTextSecondary"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/whdown"
+                        android:layout_width="40dp"
+                        android:layout_height="55dp"
+                        android:layout_alignParentRight="true"
+                        android:alpha="0.6"
+                        android:clickable="true"
+                        android:onClick="arrowPressed"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_keyboard_arrow_down_black_48dp" />
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/com1master"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/noComsTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:text="No work history"
+                        android:textSize="16sp"
+                        android:visibility="gone" />
+
+                    <RelativeLayout
+                        android:id="@+id/com1rel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dp"
+                            android:background="@android:color/darker_gray" />
+
+                        <TextView
+                            android:id="@+id/com1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_gravity="left"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="center"
+                            android:text="COMPANY 1"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:id="@+id/com1down"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_toRightOf="@+id/com1"
+                            android:alpha="0.6"
+                            android:clickable="true"
+                            android:onClick="arrowPressed"
+                            android:padding="13dp"
+                            android:src="@drawable/ic_keyboard_arrow_down_black_48dp" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/com1name"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="0dp"
+                        android:gravity="center"
+                        android:textSize="17sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/com1pos"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="0dp"
+                        android:gravity="center"
+                        android:textSize="17sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/com1dates"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="0dp"
+                        android:gravity="center"
+                        android:textSize="17sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/com1resp"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="0dp"
+                        android:gravity="center"
+                        android:textSize="17sp"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/com2master"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <RelativeLayout
+                        android:id="@+id/com2rel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dp"
+                            android:background="@android:color/darker_gray" />
+
+                        <TextView
+                            android:id="@+id/com2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_gravity="left"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="center"
+                            android:text="COMPANY 2"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="18sp" />
+
+                        <ImageView
+                            android:id="@+id/com2down"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_toRightOf="@+id/com2"
+                            android:alpha="0.6"
+                            android:clickable="true"
+                            android:onClick="arrowPressed"
+                            android:padding="13dp"
+                            android:src="@drawable/ic_keyboard_arrow_down_black_48dp" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/com2name"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="0dp"
+                        android:gravity="center"
+                        android:textSize="17sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/com2pos"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="0dp"
+                        android:gravity="center"
+                        android:textSize="17sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/com2dates"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="0dp"
+                        android:gravity="center"
+                        android:textSize="17sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/com2resp"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="0dp"
+                        android:gravity="center"
+                        android:textSize="17sp"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/com3master"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <RelativeLayout
+                        android:id="@+id/com3rel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dp"
+                            android:background="@android:color/darker_gray" />
+
+                        <TextView
+                            android:id="@+id/com3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_gravity="left"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="center"
+                            android:text="COMPANY 3"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="18sp" />
+
+                        <ImageView
+                            android:id="@+id/com3down"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_toRightOf="@+id/com3"
+                            android:alpha="0.6"
+                            android:clickable="true"
+                            android:onClick="arrowPressed"
+                            android:padding="13dp"
+                            android:src="@drawable/ic_keyboard_arrow_down_black_48dp" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/com3name"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="0dp"
+                        android:gravity="center"
+                        android:textSize="17sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/com3pos"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="0dp"
+                        android:gravity="center"
+                        android:textSize="17sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/com3dates"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="0dp"
+                        android:gravity="center"
+                        android:textSize="17sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/com3resp"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="0dp"
+                        android:gravity="center"
+                        android:textSize="17sp"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/addcompanymaster"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <RelativeLayout
+                        android:id="@+id/reladdcompany"
+                        style="@style/FloatingTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:clickable="true"
+                        android:elevation="0dp"
+                        android:onClick="addCompany"
+                        android:translationZ="0dp"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:alpha="0.5"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_add_circle_black_48dp" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/addcompanylayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <EditText
+                            android:id="@+id/addcomname"
+                            style="@style/FloatingTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginBottom="3dp"
+                            android:elevation="0dp"
+                            android:hint="Company Name"
+                            android:textSize="17sp"
+                            android:translationZ="0dp" />
+
+                        <EditText
+                            android:id="@+id/addcompos"
+                            style="@style/FloatingTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginBottom="3dp"
+                            android:elevation="0dp"
+                            android:hint="Position Held"
+                            android:textSize="17sp"
+                            android:translationZ="0dp" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/addcomfrom"
+                                style="@style/FloatingTextView"
+                                android:layout_width="150dp"
+                                android:layout_height="40dp"
+                                android:layout_marginBottom="2dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="0dp"
+                                android:elevation="0dp"
+                                android:hint="FROM: (dd/mm/yy)"
+                                android:inputType="date"
+                                android:textSize="17sp"
+                                android:translationZ="0dp" />
+
+                            <EditText
+                                android:id="@+id/addcomto"
+                                style="@style/FloatingTextView"
+                                android:layout_width="150dp"
+                                android:layout_height="40dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginBottom="2dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_toRightOf="@id/com1from"
+                                android:elevation="0dp"
+                                android:hint="TO: (dd/mm/yy)"
+                                android:inputType="date"
+                                android:textSize="17sp"
+                                android:translationZ="0dp" />
+                        </RelativeLayout>
+
+                        <EditText
+                            android:id="@+id/addcomresp"
+                            style="@style/FloatingTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="3dp"
+                            android:elevation="0dp"
+                            android:hint="Responsibilities"
+                            android:lines="2"
+                            android:maxLines="5"
+                            android:scrollHorizontally="false"
+                            android:translationZ="0dp" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <Button
+                                android:id="@+id/bSaveCom"
+                                style="@style/FloatingTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginLeft="20dp"
+                                android:clickable="true"
+                                android:elevation="0dp"
+                                android:text="SAVE"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="16sp"
+                                android:translationZ="0dp" />
+
+                            <Button
+                                android:id="@+id/bDiscardCom"
+                                style="@style/FloatingTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginRight="20dp"
+                                android:clickable="true"
+                                android:elevation="0dp"
+                                android:text="DISCARD"
+                                android:textColor="@color/colorAccentDark"
+                                android:textSize="16sp"
+                                android:translationZ="0dp" />
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_drawer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/menu_drawer" />
+
+</android.support.v4.widget.DrawerLayout>

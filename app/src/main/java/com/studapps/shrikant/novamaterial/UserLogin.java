@@ -1,0 +1,178 @@
+package com.studapps.shrikant.novamaterial;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.Random;
+
+public class UserLogin extends AppCompatActivity implements View.OnClickListener {
+
+    UserLocalStore userLocalStore;
+    TextView regbutton;
+    String email;
+    ServerRequests serverRequests;
+    EditText etun, etpass, resetEmail, resetUsername;
+    Button blogin, resetButton;
+    String username, password = "";
+
+    private static String randomPasswordGenerate() {
+        Random generator = new Random();
+        String set = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+        String password = "";
+        char tempChar;
+        for (int i = 0; i < 16; i++) {
+            tempChar = set.charAt(generator.nextInt(62));
+            password += tempChar;
+        }
+        return password;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_user_login);
+
+        serverRequests = new ServerRequests(this);
+        userLocalStore = new UserLocalStore(this);
+
+        if (authenticateifLoggedIn()) {
+            startActivity(new Intent(this, UserProfile.class));
+        }
+
+        resetUsername = (EditText) findViewById(R.id.resetUsername);
+        resetEmail = (EditText) findViewById(R.id.resetEmail);
+        etun = (EditText) findViewById(R.id.log2etun);
+        regbutton = (TextView) findViewById(R.id.log2register);
+        etpass = (EditText) findViewById(R.id.log2etpass);
+
+        resetButton = (Button) findViewById(R.id.resetButton);
+        blogin = (Button) findViewById(R.id.log2login);
+
+        blogin.setOnClickListener(this);
+        regbutton.setOnClickListener(this);
+
+        //Txtchanged listener to enable Login button only after password is entered
+        etpass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                blogin.setEnabled(!etpass.getText().toString().trim().isEmpty());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    //Disables the back button
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.log2login:
+                username = etun.getText().toString();
+                password = etpass.getText().toString();
+                //If user wants to continue being logged in
+                User user = new User(username, password);
+                //Select corresponding user from the database after passing username(ONLINE DB)
+                serverRequests.fetchUserDatafromBackground(user, new GetUserCallBack() {
+                    @Override
+                    public void done(User returnedUser) {
+                        if (returnedUser == null) ;
+                        else if (returnedUser.getUsername().equals("admin"))
+                            startActivity(new Intent(UserLogin.this, AdminPanel.class));
+                        else {
+                            userLocalStore.putAllDetails(returnedUser);
+                            logUserIn();
+                        }
+                    }
+                });
+                break;
+            case R.id.log2register:
+                startActivity(new Intent(this, Register.class));
+                break;
+        }
+    }
+
+    public boolean authenticateifLoggedIn() {
+        System.out.println("Authenticating");
+        User user = userLocalStore.getAllDetails();
+        System.out.println("Got " + user.getUsername());
+        return (user.getUsername() != null && (!user.getUsername().equals("")));
+    }
+
+    public void logUserIn() {
+        Intent i = new Intent(this, UserProfile.class);
+        startActivity(i);
+    }
+
+    public void startResetProcess(View view) {
+        resetButton.setVisibility(View.VISIBLE);
+        resetEmail.setVisibility(View.VISIBLE);
+        resetUsername.setVisibility(View.VISIBLE);
+    }
+
+    public void resetPassword(View view) {
+        String newpass = randomPasswordGenerate();
+        newpass = newpass.trim();
+        System.out.println(newpass);
+        email = resetEmail.getText().toString();
+        username = resetUsername.getText().toString();
+        resetEmail.setHint("Enter Email ID");
+        resetEmail.setHintTextColor(Color.LTGRAY);
+        if (email.length() == 0) {
+            resetEmail.setText("");
+            resetEmail.setHintTextColor(Color.RED);
+            resetEmail.setHint("Enter a valid Email ID");
+            return;
+        }
+        if ((email.length() > 0))
+            if (!((email.contains("@")) && ((email.endsWith(".com") || email.endsWith("co.in") || email.endsWith(".org") || email.endsWith(".biz") || email.endsWith(".co.uk") || email.endsWith(".ac.in"))))) {
+                resetEmail.setText("");
+                resetEmail.setHintTextColor(Color.RED);
+                resetEmail.setHint("Enter a valid Email ID");
+                return;
+            }
+        serverRequests.resetPassword(username, resetEmail.getText().toString(), newpass, new GetUserCallBack() {
+            @Override
+            public void done(User returnedUser) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(UserLogin.this)
+                        .setTitle("Password Reset!")
+                        .setMessage("Please check your registered Email ID for further instructions.")
+                        .setInverseBackgroundForced(true)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+                resetEmail.setText("");
+                resetButton.setVisibility(View.GONE);
+                resetEmail.setVisibility(View.GONE);
+
+            }
+        });
+    }
+
+}

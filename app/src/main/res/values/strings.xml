@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Nova HRO</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_user_profile2">UserProfile2</string>
+    <string name="drawer_closed">Closed</string>
+    <string name="drawer_open">Open</string>
+    <string name="title_activity_account_settings">AccountSettings</string>
+    <string name="title_activity_user">User</string>
+    <string name="title_activity_server_requests">ServerRequests</string>
+    <string name="title_activity_user_local_store">UserLocalStore</string>
+    <string name="title_activity_get_user_call_back">GetUserCallBack</string>
+    <string name="title_activity_user_login">UserLogin</string>
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_admin_panel">AdminPanel</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_register_2">Register_2</string>
+    <string name="title_activity_job_finder">JobFinder</string>
+    <string name="title_activity_saved_jobs">SavedJobs</string>
+</resources>
