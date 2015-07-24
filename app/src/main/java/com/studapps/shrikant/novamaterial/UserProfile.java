@@ -72,16 +72,15 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
 
         displayedAge = (TextView) findViewById(R.id.profileAge);
         displayedEmail = (TextView) findViewById(R.id.profileEmail);
-        displayedName = (TextView) findViewById(R.id.profileName);
+        displayedName = (TextView) findViewById(R.id.profilename);
         displayedPhone = (TextView) findViewById(R.id.profilePhone);
         displayedUsername = (TextView) findViewById(R.id.profileUsername);
 
         displayedName.setText(receivedUser.getName());
-        displayedUsername.setText(receivedUser.getUsername());
-        displayedAge.setText(receivedUser.getAge() + " years");
-        displayedPhone.setText("+91 " + receivedUser.getPhone());
-        displayedEmail.setText(receivedUser.getEmail());
-
+        displayedUsername.setText("      " + receivedUser.getUsername());
+        displayedAge.setText("      " + receivedUser.getAge() + " years");
+        displayedPhone.setText("      +91 " + receivedUser.getPhone());
+        displayedEmail.setText("      " + receivedUser.getEmail());
     }
 
     @Override
