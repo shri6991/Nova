@@ -4,6 +4,7 @@ package com.studapps.shrikant.novamaterial;
  * Created by shrikant on 6/21/2015.
  */
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -32,6 +33,8 @@ public class ServerRequests {
     ProgressDialog progressDialog;
     String serverresponse;
     Context context;
+    UserLocalStore userLocalStore;
+    Activity parentActivity;
 
     public ServerRequests(Context context) {
         progressDialog = new ProgressDialog(context);
@@ -39,6 +42,8 @@ public class ServerRequests {
         progressDialog.setMessage("Please Wait...");
         progressDialog.setCancelable(false);
         this.context = context;
+        this.userLocalStore = new UserLocalStore(context);
+        parentActivity = (Activity) context;
     }
 
     public boolean checkUsernameAvailabilty(String username, GetUserCallBack getUserCallBack) {
@@ -1239,7 +1244,14 @@ public class ServerRequests {
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            if (!serverresponse.equals("")) {
+                userLocalStore.update("position", position);
+                userLocalStore.update("experience", experience);
+                userLocalStore.update("curloc", curloc);
+                userLocalStore.update("desloc", desloc);
+            }
             progressDialog.dismiss();
+            parentActivity.recreate();
             super.onPostExecute(aVoid);
         }
 
@@ -1338,7 +1350,10 @@ public class ServerRequests {
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            if (!serverresponse.equals(""))
+                userLocalStore.update(editable, variable);
             progressDialog.dismiss();
+            parentActivity.recreate();
             super.onPostExecute(aVoid);
         }
     }
@@ -1358,6 +1373,14 @@ public class ServerRequests {
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            if (!serverresponse.equals("")) {
+                userLocalStore.update("com" + comno + "name", comname);
+                userLocalStore.update("com" + comno + "from", comfrom);
+                userLocalStore.update("com" + comno + "to", comto);
+                userLocalStore.update("com" + comno + "pos", compos);
+                userLocalStore.update("com" + comno + "resp", comresp);
+            }
+            parentActivity.recreate();
             progressDialog.dismiss();
             super.onPostExecute(aVoid);
         }

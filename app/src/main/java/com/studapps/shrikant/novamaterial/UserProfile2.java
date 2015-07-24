@@ -128,7 +128,7 @@ public class UserProfile2 extends AppCompatActivity implements NavigationView.On
             com3rel.setVisibility(View.GONE);
             addcompanymaster.setVisibility(View.GONE);
             reladdcompany.setVisibility(View.VISIBLE);
-        } else if (receivedUser.getCom3name().equals("") || receivedUser.getCom3name().equals(" ")) {
+        } else if (receivedUser.getCom3name().equals("")) {
             System.out.println("ENtered 3");
             com3rel.setVisibility(View.GONE);
             addcompanymaster.setVisibility(View.GONE);
@@ -157,6 +157,9 @@ public class UserProfile2 extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, AccountSettings.class));
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
+            case R.id.item_logout:
+                userLocalStore.logOutUser();
+                startActivity(new Intent(this, UserLogin.class));
         }
         return true;
     }
@@ -326,6 +329,10 @@ public class UserProfile2 extends AppCompatActivity implements NavigationView.On
                 else reladdcompany.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    public void refresh() {
+        recreate();
     }
 }
 

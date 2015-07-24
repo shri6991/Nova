@@ -128,6 +128,12 @@ public class UserLocalStore {
         return new User(username, name, password, email, age, phone, position, experience, curloc, desloc, imageuri, com1name, com1pos, com1from, com1to, com1resp, com2name, com2pos, com2from, com2to, com2resp, com3name, com3pos, com3from, com3to, com3resp);
     }
 
+    public void update(String editable, String variable) {
+        SharedPreferences.Editor spEditor = sharedPreferences.edit();
+        spEditor.putString(editable, variable);
+        spEditor.commit();
+    }
+
     public void logOutUser() {
         SharedPreferences.Editor spEditor = sharedPreferences.edit();
         spEditor.clear();
