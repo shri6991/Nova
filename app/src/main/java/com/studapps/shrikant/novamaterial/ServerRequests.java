@@ -328,11 +328,12 @@ public class ServerRequests {
                     while ((line = br.readLine()) != null) {
                         serverresponse += line;
                     }
-                    System.out.println("RESPONSE = " + serverresponse);
                     jsonObject = new JSONObject(serverresponse);
                     if (jsonObject.length() == 0) return null;
-                    else
+                    else {
+                        System.out.println("RESPONSE = " + "+" + jsonObject.getString("com1name") + "+" + jsonObject.getString("com2name") + "+" + jsonObject.getString("com3name"));
                         return new User(getSpaces(jsonObject.getString("username")), getSpaces(jsonObject.getString("name")), getSpaces(jsonObject.getString("password")), getSpaces(jsonObject.getString("email")), getSpaces(jsonObject.getString("age")), getSpaces(jsonObject.getString("phone")), getSpaces(jsonObject.getString("position")), getSpaces(jsonObject.getString("experience")), getSpaces(jsonObject.getString("curloc")), getSpaces(jsonObject.getString("desloc")), jsonObject.getString("imageuri"), getSpaces(jsonObject.getString("com1name")), getSpaces(jsonObject.getString("com1pos")), getSpaces(jsonObject.getString("com1from")), getSpaces(jsonObject.getString("com1to")), getSpaces(jsonObject.getString("com1resp")), getSpaces(jsonObject.getString("com2name")), getSpaces(jsonObject.getString("com2pos")), getSpaces(jsonObject.getString("com2from")), getSpaces(jsonObject.getString("com2to")), getSpaces(jsonObject.getString("com1resp")), getSpaces(jsonObject.getString("com3name")), getSpaces(jsonObject.getString("com3pos")), getSpaces(jsonObject.getString("com3from")), getSpaces(jsonObject.getString("com3to")), getSpaces(jsonObject.getString("com3resp")));
+                    }
                 } else serverresponse = "";
             } catch (Exception e) {
                 e.printStackTrace();

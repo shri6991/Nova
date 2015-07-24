@@ -111,19 +111,29 @@ public class UserProfile2 extends AppCompatActivity implements NavigationView.On
         com3pos.setText(receivedUser.getCom3pos());
         com3dates.setText(receivedUser.getCom3from() + " to " + receivedUser.getCom3to());
         com3resp.setText(receivedUser.getCom3resp());
+        System.out.println("com1 " + com1name.getText().toString() + "com2 " + com2name.getText().toString() + "com3 " + com3name.getText().toString());
+        addcompanymaster.setVisibility(View.GONE);
+        reladdcompany.setVisibility(View.GONE);
         if (receivedUser.getCom1name().equals("") || receivedUser.getCom1name().equals(" ")) {
             com1rel.setVisibility(View.GONE);
+            System.out.println("ENtered 1");
             com2rel.setVisibility(View.GONE);
             com3rel.setVisibility(View.GONE);
             noComs.setVisibility(View.VISIBLE);
+            addcompanymaster.setVisibility(View.GONE);
             reladdcompany.setVisibility(View.VISIBLE);
         } else if (receivedUser.getCom2name().equals("") || receivedUser.getCom2name().equals(" ")) {
+            System.out.println("ENtered 2");
             com2rel.setVisibility(View.GONE);
             com3rel.setVisibility(View.GONE);
+            addcompanymaster.setVisibility(View.GONE);
             reladdcompany.setVisibility(View.VISIBLE);
-        } else if (receivedUser.getCom3name().equals("") || receivedUser.getCom3name().equals(" "))
+        } else if (receivedUser.getCom3name().equals("") || receivedUser.getCom3name().equals(" ")) {
+            System.out.println("ENtered 3");
             com3rel.setVisibility(View.GONE);
-        reladdcompany.setVisibility(View.VISIBLE);
+            addcompanymaster.setVisibility(View.GONE);
+            reladdcompany.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -303,8 +313,8 @@ public class UserProfile2 extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
                 serverRequests.addCompany(receivedUser.getUsername(), etname.getText().toString(), etpos.getText().toString(), etfrom.getText().toString(), etto.getText().toString(), etresp.getText().toString(), comno);
                 addcompanylayout.setVisibility(View.GONE);
-                reladdcompany.setVisibility(View.VISIBLE);
-                if (comno.equals("3")) addcompanymaster.setVisibility(View.GONE);
+                if (comno.equals("3")) reladdcompany.setVisibility(View.GONE);
+                else reladdcompany.setVisibility(View.VISIBLE);
             }
         });
 
@@ -312,7 +322,8 @@ public class UserProfile2 extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 addcompanylayout.setVisibility(View.GONE);
-                reladdcompany.setVisibility(View.GONE);
+                if (comno.equals("3")) reladdcompany.setVisibility(View.GONE);
+                else reladdcompany.setVisibility(View.VISIBLE);
             }
         });
     }
