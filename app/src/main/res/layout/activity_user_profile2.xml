@@ -44,9 +44,11 @@
                         android:layout_alignParentLeft="true"
                         android:layout_toLeftOf="@+id/pdedit"
                         android:alpha="0.8"
+                        android:clickable="true"
                         android:gravity="center"
+                        android:onClick="arrowPressed"
                         android:text="PROFESSIONAL DETAILS"
-                        android:textColor="@color/colorTextPrimary"
+                        android:textColor="@color/White"
                         android:textSize="18sp" />
 
                     <ImageView
@@ -71,11 +73,6 @@
                         android:padding="5dp"
                         android:src="@drawable/ic_keyboard_arrow_up_black_48dp" />
                 </RelativeLayout>
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:background="@android:color/darker_gray" />
 
                 <LinearLayout
                     android:id="@+id/llviewprof"
@@ -197,11 +194,6 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0dp">
 
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="1dp"
-                        android:background="@android:color/darker_gray" />
-
                     <TextView
                         android:id="@+id/wh"
                         android:layout_width="fill_parent"
@@ -211,7 +203,7 @@
                         android:alpha="0.8"
                         android:gravity="center"
                         android:text="WORK HISTORY"
-                        android:textColor="@color/colorTextPrimary"
+                        android:textColor="@color/White"
                         android:textSize="18sp" />
 
                     <ImageView

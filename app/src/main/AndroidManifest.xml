@@ -26,11 +26,9 @@
         </activity>
         <activity
             android:name=".UserProfile"
-            android:label="Personal Details"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".UserProfile2"
-            android:label="Professional Details"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".AccountSettings"
