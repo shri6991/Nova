@@ -54,7 +54,7 @@ public class AccountSettings extends AppCompatActivity {
         asAboutDown = (ImageView) findViewById(R.id.asAboutDown);
         asImageView = (ImageView) findViewById(R.id.asImageView);
 
-        //asname = (TextView) findViewById(R.id.asname);
+        asname = (TextView) findViewById(R.id.asname);
         asphone = (TextView) findViewById(R.id.asphone);
         asage = (TextView) findViewById(R.id.asage);
 
@@ -63,7 +63,7 @@ public class AccountSettings extends AppCompatActivity {
         messagesubject = (EditText) findViewById(R.id.asetsubject);
         messagebody = (EditText) findViewById(R.id.asetbody);
 
-        //asname.setText(receivedUser.getName());
+        asname.setText(receivedUser.getName());
         asphone.setText("+91 " + receivedUser.getPhone());
         asage.setText(receivedUser.getAge() + " years");
 

@@ -26,9 +26,11 @@
         </activity>
         <activity
             android:name=".UserProfile"
+            android:label=" "
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".UserProfile2"
+            android:label=" "
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".AccountSettings"
