@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import java.util.Random;
 
-public class UserLogin extends AppCompatActivity implements View.OnClickListener {
+public class Login extends AppCompatActivity implements View.OnClickListener {
 
     UserLocalStore userLocalStore;
     TextView regbutton;
@@ -99,7 +99,7 @@ public class UserLogin extends AppCompatActivity implements View.OnClickListener
                     public void done(User returnedUser) {
                         if (returnedUser == null) ;
                         else if (returnedUser.getUsername().equals("admin"))
-                            startActivity(new Intent(UserLogin.this, AdminPanel.class));
+                            startActivity(new Intent(Login.this, AdminPanel.class));
                         else {
                             userLocalStore.putAllDetails(returnedUser);
                             logUserIn();
@@ -155,7 +155,7 @@ public class UserLogin extends AppCompatActivity implements View.OnClickListener
         serverRequests.resetPassword(username, resetEmail.getText().toString(), newpass, new GetUserCallBack() {
             @Override
             public void done(User returnedUser) {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(UserLogin.this)
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Login.this)
                         .setTitle("Password Reset!")
                         .setMessage("Please check your registered Email ID for further instructions.")
                         .setInverseBackgroundForced(true)

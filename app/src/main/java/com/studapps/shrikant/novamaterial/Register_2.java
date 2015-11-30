@@ -103,7 +103,7 @@ public class Register_2 extends AppCompatActivity implements AdapterView.OnItemS
             public void done(User returnedUser) {
             }
         });
-        startActivity(new Intent(this, UserLogin.class));
+        startActivity(new Intent(this, Login.class));
     }
 
     @Override

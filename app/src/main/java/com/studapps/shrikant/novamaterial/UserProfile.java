@@ -3,9 +3,11 @@ package com.studapps.shrikant.novamaterial;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -24,14 +26,16 @@ import java.io.InputStream;
 
 public class UserProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    Toolbar toolbar;
     NavigationView navView;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle drawerToggle;
     User receivedUser;
+    CollapsingToolbarLayout collapsingToolbar;
+    Toolbar toolbar;
     ServerRequests serverRequests;
+    Bitmap returndecoded;
     UserLocalStore userLocalStore;
-    TextView headerText, displayedName, displayedUsername, displayedEmail, displayedAge, displayedPhone;
+    TextView headerText, displayedUsername, displayedEmail, displayedAge, displayedPhone;
     ImageView headerImageView, captureImageView;
     int editMode = 0;
 
@@ -43,18 +47,19 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile);
+        setContentView(R.layout.newprofile);
 
         serverRequests = new ServerRequests(this);
         userLocalStore = new UserLocalStore(this);
         receivedUser = userLocalStore.getAllDetails();
-
-        headerText = (TextView) findViewById(R.id.headerText);
-        headerText.setText(receivedUser.getName());
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("");
-
+        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar.setTitle(receivedUser.getName());
+        collapsingToolbar.setExpandedTitleColor(Color.WHITE);
+        collapsingToolbar.setCollapsedTitleTextColor(Color.WHITE);
+        headerText = (TextView) findViewById(R.id.headerText);
+        headerText.setText(receivedUser.getName());
         navView = (NavigationView) findViewById(R.id.nav_drawer);
         navView.setNavigationItemSelectedListener(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_userprofile);
@@ -65,18 +70,15 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
                 R.string.drawer_closed);
         drawerLayout.setDrawerListener(drawerToggle);
         drawerToggle.syncState();
-
         new importimageasync().execute();
-        captureImageView = (ImageView) findViewById(R.id.captureimageView);
+        captureImageView = (ImageView) findViewById(R.id.img);
         headerImageView = (ImageView) findViewById(R.id.headerImage);
 
         displayedAge = (TextView) findViewById(R.id.profileAge);
         displayedEmail = (TextView) findViewById(R.id.profileEmail);
-        displayedName = (TextView) findViewById(R.id.profilename);
         displayedPhone = (TextView) findViewById(R.id.profilePhone);
         displayedUsername = (TextView) findViewById(R.id.profileUsername);
 
-        displayedName.setText(receivedUser.getName());
         displayedUsername.setText("      " + receivedUser.getUsername());
         displayedAge.setText("      " + receivedUser.getAge() + " years");
         displayedPhone.setText("      +91 " + receivedUser.getPhone());
@@ -109,7 +111,7 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
                 break;
             case R.id.item_logout:
                 userLocalStore.logOutUser();
-                startActivity(new Intent(this, UserLogin.class));
+                startActivity(new Intent(this, Login.class));
                 break;
         }
         return true;
@@ -127,9 +129,9 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == RESULT_OK) {
             String encoded = "";
-            Uri Photouri = data.getData();
+            Uri PhotoUri = data.getData();
             try {
-                InputStream is = getContentResolver().openInputStream(Photouri);
+                InputStream is = getContentResolver().openInputStream(PhotoUri);
                 Bitmap yourBitmap = BitmapFactory.decodeStream(is);
 
                 int scale = setScaleFactor(yourBitmap.getWidth(), yourBitmap.getHeight());
@@ -141,11 +143,11 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
                 encoded = Base64.encodeToString(byteArray, Base64.URL_SAFE);
                 System.out.println("Encoded the string");
-
                 userLocalStore.updateImage(encoded);
                 serverRequests.updateDPinBackground(encoded, receivedUser.getUsername(), new GetUserCallBack() {
                     @Override
                     public void done(User returnedUser) {
+                        returndecoded = decodeBase64(receivedUser.getImageUri());
                     }
                 });
                 captureImageView.setImageBitmap(resized);

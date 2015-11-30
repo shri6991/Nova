@@ -134,7 +134,7 @@ public class AccountSettings extends AppCompatActivity {
             }
         });
         userLocalStore.logOutUser();
-        startActivity(new Intent(AccountSettings.this, UserLogin.class));
+        startActivity(new Intent(AccountSettings.this, Login.class));
     }
 
     public void showAbout(View view) {

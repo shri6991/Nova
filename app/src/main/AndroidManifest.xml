@@ -15,7 +15,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".UserLogin"
+            android:name=".Login"
             android:label="Nova"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
@@ -46,7 +46,7 @@
             android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".UserLogin" />
+                android:value=".Login" />
         </activity>
         <activity
             android:name=".AdminPanel"

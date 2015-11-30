@@ -159,7 +159,7 @@ public class UserProfile2 extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.item_logout:
                 userLocalStore.logOutUser();
-                startActivity(new Intent(this, UserLogin.class));
+                startActivity(new Intent(this, Login.class));
         }
         return true;
     }

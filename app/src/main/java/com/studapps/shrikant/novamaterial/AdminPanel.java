@@ -88,7 +88,7 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
             case R.id.item_personal:
                 break;
             case R.id.item_logout:
-                startActivity(new Intent(this, UserLogin.class));
+                startActivity(new Intent(this, Login.class));
         }
         return true;
     }

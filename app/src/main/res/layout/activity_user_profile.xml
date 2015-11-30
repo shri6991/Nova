@@ -1,195 +1,138 @@
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawer_layout_userprofile"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <include
-            android:id="@+id/app_bar"
-            layout="@layout/app_bar" />
-
-        <TextView
-            android:id="@+id/profilename"
-            style="@style/FloatingTextViewColored"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_below="@id/app_bar"
-            android:layout_marginTop="10dp"
-            android:text="SHRIKANT BHASKAR"
-            android:textColor="@color/White"
-            android:textSize="21sp" />
-        <ScrollView
-            style="@style/FloatingTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/profilename"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="0dp"
-            android:paddingBottom="0dp">
-            <RelativeLayout
+        android:layout_marginBottom="0dp">
+
+
+        <RelativeLayout
+            android:id="@+id/profilerel1"
+            style="@style/FloatingTextView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="0dp"
-                android:padding="0dp">
-
-                <ImageView
-                    android:id="@+id/captureimageView"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/drawable" />
-
-                <ImageView
-                    android:id="@+id/bChangeImage"
-                    style="@style/FloatingTextView"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_toRightOf="@+id/captureimageView"
-                    android:alpha="0.7"
-                    android:clickable="true"
-                    android:elevation="0dp"
-                    android:onClick="SetImage"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_mode_edit_black_48dp"
-                    android:translationZ="0dp" />
-
-                <ImageView
-                    android:id="@+id/bDeleteImage"
-                    style="@style/FloatingTextView"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_below="@+id/bChangeImage"
-                    android:layout_margin="2dp"
-                    android:layout_toEndOf="@+id/captureimageView"
-                    android:layout_toRightOf="@+id/captureimageView"
-                    android:alpha="0.7"
-                    android:clickable="true"
-                    android:elevation="0dp"
-                    android:onClick="removeImage"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_delete_black_48dp"
-                    android:translationZ="0dp" />
+            android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/usernamedisplay"
                     android:layout_width="fill_parent"
-                    android:layout_height="30dp"
-                    android:layout_below="@id/captureimageView"
-                    android:layout_centerVertical="true"
+                    android:layout_height="45dp"
                     android:alpha="0.7"
                     android:gravity="center_vertical"
                     android:text="   Username"
                     android:textColor="@color/Black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
-                <RelativeLayout
-                    android:id="@+id/profilerel1"
-                    android:layout_width="match_parent"
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/usernamedisplay"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/profileUsername"
+                android:layout_width="fill_parent"
                     android:layout_height="50dp"
-                    android:layout_below="@+id/usernamedisplay">
+                android:layout_below="@id/usernamedisplay"
+                android:alpha="0.8"
+                android:gravity="center_vertical"
+                android:text="      Username"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="18sp" />
+        </RelativeLayout>
 
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@android:color/darker_gray" />
 
-                    <TextView
-                        android:id="@+id/profileUsername"
-                        android:layout_width="fill_parent"
-                        android:layout_height="45dp"
-                        android:layout_centerVertical="true"
-                        android:alpha="0.8"
-                        android:gravity="center_vertical"
-                        android:text="      Username"
-                        android:textColor="@color/colorTextPrimary"
-                        android:textSize="18sp" />
-                </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/profilerel3"
+            style="@style/FloatingTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profilerel1"
+            android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/emaildisplay"
                     android:layout_width="fill_parent"
-                    android:layout_height="30dp"
-                    android:layout_below="@id/profilerel1"
-                    android:layout_centerVertical="true"
+                    android:layout_height="45dp"
+                    android:layout_alignParentTop="true"
                     android:alpha="0.7"
                     android:gravity="center_vertical"
                     android:text="   Email ID"
                     android:textColor="@color/Black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
-                <RelativeLayout
-                    android:id="@+id/profilerel3"
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/emaildisplay"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/profileEmail"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_below="@+id/emaildisplay">
+                android:layout_below="@id/divider2"
+                android:alpha="0.8"
+                android:gravity="center_vertical"
+                android:text="      Email ID"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="18sp" />
 
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@android:color/darker_gray" />
+            <EditText
+                android:id="@+id/editEmail"
+                style="@style/FloatingTextView"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/divider2"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="50dp"
+                android:elevation="0dp"
+                android:textSize="17sp"
+                android:translationZ="0dp"
+                android:visibility="gone" />
 
-                    <TextView
-                        android:id="@+id/profileEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_centerVertical="true"
-                        android:alpha="0.8"
-                        android:gravity="center_vertical"
-                        android:text="      Email ID"
-                        android:textColor="@color/colorTextPrimary"
-                        android:textSize="18sp" />
+            <ImageView
+                android:id="@+id/imgeditemail"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentRight="true"
+                android:alpha="0.5"
+                android:onClick="editEmail"
+                android:padding="10dp"
+                android:src="@drawable/ic_mode_edit_black_48dp" />
 
-                    <EditText
-                        android:id="@+id/editEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="10dp"
-                        android:gravity="center"
-                        android:textSize="17sp"
-                        android:visibility="gone" />
+            <ImageView
+                android:id="@+id/imgconfirmemail"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/divider2"
+                android:alpha="0.7"
+                android:clickable="true"
+                android:padding="12dp"
+                android:src="@drawable/ic_offline_pin_black_48dp"
+                android:visibility="gone" />
+        </RelativeLayout>
 
-                    <ImageView
-                        android:id="@+id/imgeditemail"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerInParent="true"
-                        android:alpha="0.5"
-                        android:onClick="editEmail"
-                        android:padding="12dp"
-                        android:src="@drawable/ic_mode_edit_black_48dp" />
 
-                    <ImageView
-                        android:id="@+id/imgconfirmemail"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerInParent="true"
-                        android:alpha="0.7"
-                        android:clickable="true"
-                        android:padding="15dp"
-                        android:src="@drawable/ic_offline_pin_black_48dp"
-                        android:visibility="gone" />
-                </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/profilerel4"
+            style="@style/FloatingTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profilerel3"
+            android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/agedisplay"
                     android:layout_width="fill_parent"
-                    android:layout_height="30dp"
-                    android:layout_below="@id/profilerel3"
-                    android:layout_centerVertical="true"
+                    android:layout_height="45dp"
                     android:alpha="0.7"
                     android:gravity="center_vertical"
                     android:text="   Age"
@@ -197,36 +140,41 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <RelativeLayout
-                    android:id="@+id/profilerel4"
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/agedisplay"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/profileAge"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_below="@+id/agedisplay">
+                android:layout_below="@id/divider3"
+                android:layout_centerVertical="true"
+                android:alpha="0.8"
+                android:gravity="center_vertical"
+                android:text="      Age"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="18sp" />
 
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@android:color/darker_gray" />
+        </RelativeLayout>
 
-                    <TextView
-                        android:id="@+id/profileAge"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:layout_centerVertical="true"
-                        android:alpha="0.8"
-                        android:gravity="center_vertical"
-                        android:text="      Age"
-                        android:textColor="@color/colorTextPrimary"
-                        android:textSize="18sp" />
 
-                </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/profilerel5"
+            style="@style/FloatingTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profilerel4"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/phonedisplay"
                     android:layout_width="fill_parent"
-                    android:layout_height="30dp"
-                    android:layout_below="@id/profilerel4"
-                    android:layout_centerVertical="true"
+                    android:layout_height="45dp"
                     android:alpha="0.7"
                     android:gravity="center_vertical"
                     android:text="   Phone Number"
@@ -234,73 +182,59 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <RelativeLayout
-                    android:id="@+id/profilerel5"
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/phonedisplay"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/profilePhone"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_below="@+id/phonedisplay"
-                    android:layout_marginBottom="5dp">
+                android:layout_below="@id/divider4"
+                android:alpha="0.8"
+                android:elevation="0dp"
+                android:gravity="center_vertical"
+                android:text="      Phone"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="18sp"
+                android:translationZ="0dp" />
 
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@android:color/darker_gray" />
+            <EditText
+                android:id="@+id/editPhone"
+                style="@style/FloatingTextView"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/divider4"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="50dp"
+                android:textSize="17sp"
+                android:visibility="gone" />
 
-                    <TextView
-                        android:id="@+id/profilePhone"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_centerVertical="true"
-                        android:alpha="0.8"
-                        android:gravity="center_vertical"
-                        android:text="      Phone"
-                        android:textColor="@color/colorTextPrimary"
-                        android:textSize="18sp" />
+            <ImageView
+                android:id="@+id/imgeditphone"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentRight="true"
+                android:alpha="0.5"
+                android:onClick="editPhone"
+                android:padding="10dp"
+                android:src="@drawable/ic_mode_edit_black_48dp" />
 
-                    <EditText
-                        android:id="@+id/editPhone"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="10dp"
-                        android:gravity="center"
-                        android:textSize="17sp"
-                        android:visibility="gone" />
-
-                    <ImageView
-                        android:id="@+id/imgeditphone"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerInParent="true"
-                        android:alpha="0.5"
-                        android:onClick="editPhone"
-                        android:padding="12dp"
-                        android:src="@drawable/ic_mode_edit_black_48dp" />
-
-                    <ImageView
-                        android:id="@+id/imgconfirmphone"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerInParent="true"
-                        android:alpha="0.7"
-                        android:clickable="true"
-                        android:padding="15dp"
-                        android:src="@drawable/ic_offline_pin_black_48dp"
-                        android:visibility="gone" />
-                </RelativeLayout>
+            <ImageView
+                android:id="@+id/imgconfirmphone"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/divider4"
+                android:alpha="0.7"
+                android:clickable="true"
+                android:padding="12dp"
+                android:src="@drawable/ic_offline_pin_black_48dp"
+                android:visibility="gone" />
             </RelativeLayout>
-        </ScrollView>
     </RelativeLayout>
-
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_drawer"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/drawer_header"
-        app:menu="@menu/menu_drawer" />
-
-</android.support.v4.widget.DrawerLayout>
+</RelativeLayout>
