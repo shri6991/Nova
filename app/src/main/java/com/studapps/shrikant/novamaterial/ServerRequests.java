@@ -16,8 +16,10 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -30,17 +32,23 @@ public class ServerRequests {
     private static final String SERVER_ADDRESS = "http://shrikantbhaskar.comlu.com/";
     private final int CONNECTION_TIMEOUT = 15 * 1000;
     private final String CONNECTION_ERROR = "Cannot connect to the server, please check your connection and try again";
-    ProgressDialog progressDialog;
+    ProgressDialog progressDialog, progressDialog1;
     String serverresponse;
     Context context;
     UserLocalStore userLocalStore;
     Activity parentActivity;
+    UserProfile userProfile;
 
     public ServerRequests(Context context) {
         progressDialog = new ProgressDialog(context);
+        progressDialog1 = new ProgressDialog(context);
+        progressDialog1.setIndeterminate(false);
+        progressDialog1.setTitle("Uploading image");
+        progressDialog1.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setTitle("Processing");
         progressDialog.setMessage("Please Wait...");
         progressDialog.setCancelable(false);
+        userProfile = new UserProfile();
         this.context = context;
         this.userLocalStore = new UserLocalStore(context);
         parentActivity = (Activity) context;
@@ -62,7 +70,10 @@ public class ServerRequests {
     }
 
     public void updateDPinBackground(String imageUri, String username, GetUserCallBack getUserCallBack) {
-        progressDialog.show();
+        progressDialog1.show();
+        progressDialog1.setTitle("Uploading image");
+        progressDialog1.setMax(100);
+        progressDialog1.setProgress(0);
         new updateImageinBackgroundAsync(imageUri, username, getUserCallBack).execute();
 
     }
@@ -336,7 +347,7 @@ public class ServerRequests {
                     jsonObject = new JSONObject(serverresponse);
                     if (jsonObject.length() == 0) return null;
                     else {
-                        System.out.println("RESPONSE = " + "+" + jsonObject.getString("com1name") + "+" + jsonObject.getString("com2name") + "+" + jsonObject.getString("com3name"));
+                        System.out.println("RESPONSE = " + serverresponse);//"+" + jsonObject.getString("com1name") + "+" + jsonObject.getString("com2name") + "+" + jsonObject.getString("com3name"));
                         return new User(getSpaces(jsonObject.getString("username")), getSpaces(jsonObject.getString("name")), getSpaces(jsonObject.getString("password")), getSpaces(jsonObject.getString("email")), getSpaces(jsonObject.getString("age")), getSpaces(jsonObject.getString("phone")), getSpaces(jsonObject.getString("position")), getSpaces(jsonObject.getString("experience")), getSpaces(jsonObject.getString("curloc")), getSpaces(jsonObject.getString("desloc")), jsonObject.getString("imageuri"), getSpaces(jsonObject.getString("com1name")), getSpaces(jsonObject.getString("com1pos")), getSpaces(jsonObject.getString("com1from")), getSpaces(jsonObject.getString("com1to")), getSpaces(jsonObject.getString("com1resp")), getSpaces(jsonObject.getString("com2name")), getSpaces(jsonObject.getString("com2pos")), getSpaces(jsonObject.getString("com2from")), getSpaces(jsonObject.getString("com2to")), getSpaces(jsonObject.getString("com1resp")), getSpaces(jsonObject.getString("com3name")), getSpaces(jsonObject.getString("com3pos")), getSpaces(jsonObject.getString("com3from")), getSpaces(jsonObject.getString("com3to")), getSpaces(jsonObject.getString("com3resp")));
                     }
                 } else serverresponse = "";
@@ -347,7 +358,7 @@ public class ServerRequests {
         }
     }
 
-    private class updateImageinBackgroundAsync extends AsyncTask<Void, Void, Void> {
+    private class updateImageinBackgroundAsync extends AsyncTask<Void, Integer, User> {
         GetUserCallBack userCallBack;
         String username;
         String imageuri;
@@ -359,15 +370,7 @@ public class ServerRequests {
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            progressDialog.dismiss();
-            if (serverresponse.equals("")) negativeAlert(CONNECTION_ERROR);
-            userCallBack.done(null);
-            super.onPostExecute(aVoid);
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
+        protected User doInBackground(Void... params) {
             System.out.println("Putting Data");
             ContentValues dataToSend = new ContentValues();
             dataToSend.put("&imageuri", imageuri);
@@ -394,12 +397,28 @@ public class ServerRequests {
 
                 int responseCode = conn.getResponseCode();
                 if (responseCode == HttpsURLConnection.HTTP_OK) {
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    System.out.println("response ok");
+                    InputStream is = new BufferedInputStream(conn.getInputStream());
+                    is.mark(99999999);
+                    BufferedReader br = new BufferedReader(new InputStreamReader(is));
                     String line;
+                    float c = 0;
+                    float k = 0;
                     while (br.readLine() != null) {
-                        line = br.readLine();
-                        serverresponse += line;
+                        c++;
+                        //System.out.println("\ncounting\n" + c);
                     }
+                    is.reset();
+                    BufferedReader br1 = new BufferedReader(new InputStreamReader(is));
+                    while (br1.readLine() != null || k < c) {
+                        k++;
+                        line = br1.readLine();
+                        //System.out.println("Reading response");
+                        serverresponse += line;
+                        publishProgress((int) ((k / c) * 100));
+                        //System.out.print("published progress" + " k,c = " + k + " " + c + "  " + ((int) ((k / c) * 100)) + "\n");
+                    }
+                    System.out.println("Response = " + serverresponse);
                 }
 
             } catch (Exception e) {
@@ -407,6 +426,21 @@ public class ServerRequests {
                 System.out.println("failure");
             }
             return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            progressDialog1.setProgress(values[0]);
+            //System.out.print("\nUpdated progress" + values[0]);
+        }
+
+        @Override
+        protected void onPostExecute(User user) {
+            progressDialog1.dismiss();
+            if (serverresponse.equals("")) negativeAlert(CONNECTION_ERROR);
+            userCallBack.done(null);
+            super.onPostExecute(user);
         }
     }
 
