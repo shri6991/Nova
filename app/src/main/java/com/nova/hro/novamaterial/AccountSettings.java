@@ -1,4 +1,4 @@
-package com.studapps.shrikant.novamaterial;
+package com.nova.hro.novamaterial;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

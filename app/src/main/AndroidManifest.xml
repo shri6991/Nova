@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.studapps.shrikant.novamaterial">
+    package="com.nova.hro.novamaterial">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission
@@ -15,7 +15,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Login"
+            android:name="com.nova.hro.novamaterial.Login"
             android:label="Nova"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
@@ -25,50 +25,50 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UserProfile"
+            android:name="com.nova.hro.novamaterial.UserProfile"
             android:label=" "
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".UserProfile2"
+            android:name="com.nova.hro.novamaterial.UserProfile2"
             android:label=" "
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".AccountSettings"
+            android:name="com.nova.hro.novamaterial.AccountSettings"
             android:label="Account Settings"
             android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".UserProfile" />
+                android:value="com.nova.hro.novamaterial.UserProfile" />
         </activity>
         <activity
-            android:name=".Register"
+            android:name="com.nova.hro.novamaterial.Register"
             android:label="Registration - Step 1"
             android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Login" />
+                android:value="com.nova.hro.novamaterial.Login" />
         </activity>
         <activity
-            android:name=".AdminPanel"
+            android:name="com.nova.hro.novamaterial.AdminPanel"
             android:label="Administrator Panel"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".Register_2"
+            android:name="com.nova.hro.novamaterial.Register_2"
             android:label="Registration - Step 2"
             android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Register" />
+                android:value="com.nova.hro.novamaterial.Register" />
         </activity>
         <activity
-            android:name=".JobFinder"
+            android:name="com.nova.hro.novamaterial.JobFinder"
             android:label="Find a Job">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".UserProfile" />
+                android:value="com.nova.hro.novamaterial.UserProfile" />
         </activity>
         <activity
-            android:name=".SavedJobs"
+            android:name="com.nova.hro.novamaterial.SavedJobs"
             android:label="@string/title_activity_saved_jobs"></activity>
     </application>
 

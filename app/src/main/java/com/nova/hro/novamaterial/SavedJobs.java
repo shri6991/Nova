@@ -1,4 +1,4 @@
-package com.studapps.shrikant.novamaterial;
+package com.nova.hro.novamaterial;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

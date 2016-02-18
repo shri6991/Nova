@@ -1,4 +1,4 @@
-package com.studapps.shrikant.novamaterial;
+package com.nova.hro.novamaterial;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -131,7 +131,7 @@ public class UserLocalStore {
     public void update(String editable, String variable) {
         SharedPreferences.Editor spEditor = sharedPreferences.edit();
         spEditor.putString(editable, variable);
-        spEditor.commit();
+        spEditor.apply();
     }
 
     public void logOutUser() {

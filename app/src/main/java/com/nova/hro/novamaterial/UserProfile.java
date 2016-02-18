@@ -1,4 +1,4 @@
-package com.studapps.shrikant.novamaterial;
+package com.nova.hro.novamaterial;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -33,6 +34,7 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
     CollapsingToolbarLayout collapsingToolbar;
     Toolbar toolbar;
     ServerRequests serverRequests;
+    int flag;
     Bitmap returndecoded;
     UserLocalStore userLocalStore;
     TextView headerText, displayedUsername, displayedEmail, displayedAge, displayedPhone;
@@ -48,7 +50,7 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newprofile);
-
+        flag = 0;
         serverRequests = new ServerRequests(this);
         userLocalStore = new UserLocalStore(this);
         receivedUser = userLocalStore.getAllDetails();
@@ -58,10 +60,12 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
         collapsingToolbar.setTitle(receivedUser.getName());
         collapsingToolbar.setExpandedTitleColor(Color.WHITE);
         collapsingToolbar.setCollapsedTitleTextColor(Color.WHITE);
-        headerText = (TextView) findViewById(R.id.headerText);
-        headerText.setText(receivedUser.getName());
         navView = (NavigationView) findViewById(R.id.nav_drawer);
         navView.setNavigationItemSelectedListener(this);
+        View header = navView.getHeaderView(0);
+        headerText = (TextView) header.findViewById(R.id.headerText);
+        headerText.setText(receivedUser.getName());
+        headerImageView = (ImageView) header.findViewById(R.id.headerImage);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_userprofile);
         drawerToggle = new ActionBarDrawerToggle(this,
                 drawerLayout,
@@ -72,8 +76,6 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
         drawerToggle.syncState();
         new importimageasync().execute();
         captureImageView = (ImageView) findViewById(R.id.img);
-        headerImageView = (ImageView) findViewById(R.id.headerImage);
-
         displayedAge = (TextView) findViewById(R.id.profileAge);
         displayedEmail = (TextView) findViewById(R.id.profileEmail);
         displayedPhone = (TextView) findViewById(R.id.profilePhone);
@@ -136,7 +138,7 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
 
                 int scale = setScaleFactor(yourBitmap.getWidth(), yourBitmap.getHeight());
 
-                Bitmap resized = Bitmap.createScaledBitmap(yourBitmap, (yourBitmap.getWidth() / scale), (yourBitmap.getHeight() / scale), true);
+                final Bitmap resized = Bitmap.createScaledBitmap(yourBitmap, (yourBitmap.getWidth() / scale), (yourBitmap.getHeight() / scale), true);
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 resized.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
 
@@ -147,11 +149,18 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
                 serverRequests.updateDPinBackground(encoded, receivedUser.getUsername(), new GetUserCallBack() {
                     @Override
                     public void done(User returnedUser) {
-                        returndecoded = decodeBase64(receivedUser.getImageUri());
+                        if (returnedUser != null) {
+                            System.out.println("Not null");
+                            returndecoded = decodeBase64(receivedUser.getImageUri());
+                            flag = 10;
+                            captureImageView.setImageBitmap(resized);
+                            Bitmap resized1 = RoundedImageView.getCroppedBitmap(resized, 35);
+                            headerImageView.setImageBitmap(resized1);
+                        } else
+                            Toast.makeText(getApplication(), "Image Update unsuccessful", Toast.LENGTH_LONG).show();
+
                     }
                 });
-                captureImageView.setImageBitmap(resized);
-                headerImageView.setImageBitmap(resized);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -248,6 +257,7 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
         protected void onPostExecute(Void aVoid) {
             if (decoded != null) {
                 captureImageView.setImageBitmap(decoded);
+                decoded = RoundedImageView.getCroppedBitmap(decoded, 35);
                 headerImageView.setImageBitmap(decoded);
 
             } else

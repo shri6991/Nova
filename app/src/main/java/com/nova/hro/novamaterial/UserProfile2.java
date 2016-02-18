@@ -1,4 +1,4 @@
-package com.studapps.shrikant.novamaterial;
+package com.nova.hro.novamaterial;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -42,14 +42,14 @@ public class UserProfile2 extends AppCompatActivity implements NavigationView.On
         userLocalStore = new UserLocalStore(this);
         receivedUser = userLocalStore.getAllDetails();
 
-        headerText = (TextView) findViewById(R.id.headerText);
-        headerText.setText(receivedUser.getName());
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("");
 
         navView = (NavigationView) findViewById(R.id.nav_drawer);
         navView.setNavigationItemSelectedListener(this);
+        View header = navView.getHeaderView(0);
+        headerText = (TextView) header.findViewById(R.id.headerText);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_userprofile2);
         drawerToggle = new ActionBarDrawerToggle(this,
                 drawerLayout,

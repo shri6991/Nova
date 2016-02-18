@@ -1,6 +1,5 @@
-package com.studapps.shrikant.novamaterial;
+package com.nova.hro.novamaterial;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -89,11 +88,11 @@ public class JobFinder extends AppCompatActivity {
         ArrayAdapter jobAdapter;
         TextView noJobText;
         User receivedUser;
-        Activity parentActivity;
+        Context parentActivity;
 
 
         @Override
-        public void onAttach(Activity activity) {
+        public void onAttach(Context activity) {
             super.onAttach(activity);
             parentActivity = activity;
         }
@@ -201,14 +200,14 @@ public class JobFinder extends AppCompatActivity {
         ListView searchJobListView;
         ArrayList<Job> arrayJob;
         ServerRequests serverRequests;
-        Activity parentActivity;
+        Context parentActivity;
         UserLocalStore userLocalStore;
         TextView noJobSearch;
         ArrayAdapter<Job> jobArrayAdapter;
         User receivedUser;
 
         @Override
-        public void onAttach(Activity activity) {
+        public void onAttach(Context activity) {
             super.onAttach(activity);
             parentActivity = activity;
             serverRequests = new ServerRequests(activity);

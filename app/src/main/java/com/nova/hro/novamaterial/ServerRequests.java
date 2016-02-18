@@ -1,4 +1,4 @@
-package com.studapps.shrikant.novamaterial;
+package com.nova.hro.novamaterial;
 
 /**
  * Created by shrikant on 6/21/2015.
@@ -149,9 +149,8 @@ public class ServerRequests {
     }
 
     public String getStringfromContentValues(ContentValues dataToSend) {
-        String postedData = "";
         String newpostedData = "";
-        postedData = dataToSend.toString().trim();
+        String postedData = dataToSend.toString().trim();
         for (int i = 0; i < postedData.length(); i++) {
             if (postedData.charAt(i) == ' ' && postedData.charAt(i + 1) != '&')
                 newpostedData += postedData.charAt(i);
@@ -394,10 +393,11 @@ public class ServerRequests {
                 bw.flush();
                 bw.close();
                 System.out.println("Written");
-
+                publishProgress(25);
                 int responseCode = conn.getResponseCode();
                 if (responseCode == HttpsURLConnection.HTTP_OK) {
                     System.out.println("response ok");
+                    publishProgress(50);
                     InputStream is = new BufferedInputStream(conn.getInputStream());
                     is.mark(99999999);
                     BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -415,7 +415,7 @@ public class ServerRequests {
                         line = br1.readLine();
                         //System.out.println("Reading response");
                         serverresponse += line;
-                        publishProgress((int) ((k / c) * 100));
+                        publishProgress(50 + (int) ((k / c) * 50));
                         //System.out.print("published progress" + " k,c = " + k + " " + c + "  " + ((int) ((k / c) * 100)) + "\n");
                     }
                     System.out.println("Response = " + serverresponse);
@@ -425,7 +425,7 @@ public class ServerRequests {
                 e.printStackTrace();
                 System.out.println("failure");
             }
-            return null;
+            return new User(username, username);
         }
 
         @Override
@@ -438,8 +438,12 @@ public class ServerRequests {
         @Override
         protected void onPostExecute(User user) {
             progressDialog1.dismiss();
-            if (serverresponse.equals("")) negativeAlert(CONNECTION_ERROR);
-            userCallBack.done(null);
+            if (serverresponse.equals("") || serverresponse.startsWith("<")) {
+                negativeAlert(CONNECTION_ERROR);
+                userCallBack.done(null);
+            } else
+                userCallBack.done(user);
+            System.out.println("Gave callback");
             super.onPostExecute(user);
         }
     }
