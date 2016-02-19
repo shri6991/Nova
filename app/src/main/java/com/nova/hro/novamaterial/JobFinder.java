@@ -7,16 +7,16 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -83,9 +83,9 @@ public class JobFinder extends AppCompatActivity {
     public static class JobSuggester extends Fragment {
         ServerRequests serverRequests;
         ArrayList<Job> arrayJobs;
-        ListView searchJobs;
+        RecyclerView searchJobs;
         UserLocalStore userLocalStore;
-        ArrayAdapter jobAdapter;
+        MyJobRecyclerAdapter jobAdapter;
         TextView noJobText;
         User receivedUser;
         Context parentActivity;
@@ -103,10 +103,11 @@ public class JobFinder extends AppCompatActivity {
             serverRequests = new ServerRequests(parentActivity);
             userLocalStore = new UserLocalStore(parentActivity);
             arrayJobs = new ArrayList<>();
-            searchJobs = (ListView) v.findViewById(R.id.jobListView);
+            searchJobs = (RecyclerView) v.findViewById(R.id.suggestedJobsRecycler);
             noJobText = (TextView) v.findViewById(R.id.noJobText);
             receivedUser = userLocalStore.getAllDetails();
-            jobAdapter = new MyJobAdapter(parentActivity, arrayJobs);
+            searchJobs.setLayoutManager(new LinearLayoutManager(getContext()));
+            jobAdapter = new MyJobRecyclerAdapter(arrayJobs);
             searchJobs.setAdapter(jobAdapter);
             fetchJobListings();
             return v;
@@ -136,59 +137,65 @@ public class JobFinder extends AppCompatActivity {
 
         }
 
+        private class MyJobRecyclerAdapter extends RecyclerView.Adapter<MyJobRecyclerAdapter.ViewHolder> {
 
-        private class MyJobAdapter extends ArrayAdapter<Job> {
+            ArrayList<Job> arrayJob = new ArrayList<>();
 
-            ArrayList<Job> arrayJobs;
-            Job temp;
-
-            public MyJobAdapter(Context context, ArrayList<Job> arrayJobs) {
-                super(context, R.layout.job_search_listview, arrayJobs);
-                this.arrayJobs = arrayJobs;
+            public MyJobRecyclerAdapter(ArrayList<Job> jl) {
+                arrayJob = jl;
             }
 
             @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                if (convertView == null) {
-                    System.out.println("View is null, inflating");
-
-                    LayoutInflater vi = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    convertView = vi.inflate(R.layout.job_search_listview, null);
-                    System.out.println("View has been inflated");
-                }
-                System.out.println("View not null");
-                TextView returnedJobID = (TextView) convertView.findViewById(R.id.returnedJobID);
-                TextView returnedJobDomain = (TextView) convertView.findViewById(R.id.returnedJobDomain);
-                TextView returnedJobPosition = (TextView) convertView.findViewById(R.id.returnedJobPosition);
-                TextView returnedJobDescription = (TextView) convertView.findViewById(R.id.returnedJobDescription);
-                TextView returnedJobExperience = (TextView) convertView.findViewById(R.id.returnedJobExperience);
-                TextView returnedJobLocation = (TextView) convertView.findViewById(R.id.returnedJobLocation);
-                TextView returnedJobRemarks = (TextView) convertView.findViewById(R.id.returnedJobRemarks);
-                Button applyForJob = (Button) convertView.findViewById(R.id.bApplyJob);
-
-                temp = arrayJobs.get(position);
-                System.out.println("Received id " + temp.getID());
-                returnedJobID.setText(temp.getID());
-                returnedJobDomain.setText(temp.getID());
-                returnedJobID.setText(temp.getType());
-                returnedJobPosition.setText(temp.getPosition());
-                returnedJobDescription.setText(temp.getDescription());
-                returnedJobExperience.setText(temp.getExperience());
-                returnedJobLocation.setText(temp.getLocation());
-                returnedJobRemarks.setText(temp.getRemarks());
-
-                applyForJob.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        applyForJob();
-                    }
-                });
-
-                return convertView;
+            public MyJobRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                LayoutInflater li = LayoutInflater.from(parent.getContext());
+                View inflatedView = li.inflate(R.layout.job_item_list, parent, false);
+                ViewHolder VH = new ViewHolder(inflatedView);
+                return VH;
             }
 
-            public void applyForJob() {
-                serverRequests.applyForJob(receivedUser.getEmail(), receivedUser.getName(), temp.getID(), temp.getPosition());
+            @Override
+            public void onBindViewHolder(ViewHolder holder, int position) {
+                Job currentJob = arrayJob.get(position);
+                holder.jobDesc.setText("Job Description: " + currentJob.getDescription());
+                holder.jobID.setText("ID: " + currentJob.getID());
+                holder.jobRemarks.setText("Remarks: " + currentJob.getRemarks());
+                holder.jobExp.setText("Experience Reqd: " + currentJob.getExperience() + " years");
+                holder.jobDomain.setText("Domain: " + currentJob.getDomain());
+                holder.jobLoc.setText("Location: " + currentJob.getLocation());
+                holder.jobType.setText("Type: " + currentJob.getType());
+                holder.jobPos.setText("Position: " + currentJob.getPosition());
+            }
+
+            @Override
+            public int getItemCount() {
+                return arrayJob.size();
+            }
+
+            public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+                TextView jobID, jobType, jobDesc, jobLoc, jobPos, jobRemarks, jobExp, jobDomain;
+                Button applyForJob;
+
+                public ViewHolder(View itemView) {
+                    super(itemView);
+                    jobID = (TextView) itemView.findViewById(R.id.returnedJobID);
+                    jobDesc = (TextView) itemView.findViewById(R.id.returnedJobDescription);
+                    jobLoc = (TextView) itemView.findViewById(R.id.returnedJobLocation);
+                    jobPos = (TextView) itemView.findViewById(R.id.returnedJobPosition);
+                    jobRemarks = (TextView) itemView.findViewById(R.id.returnedJobRemarks);
+                    jobExp = (TextView) itemView.findViewById(R.id.returnedJobExperience);
+                    jobType = (TextView) itemView.findViewById(R.id.returnedJobType);
+                    jobDomain = (TextView) itemView.findViewById(R.id.returnedJobDomain);
+                    applyForJob = (Button) itemView.findViewById(R.id.bApplyJob);
+                    applyForJob.setOnClickListener(this);
+                }
+
+                @Override
+                public void onClick(View v) {
+                    switch (v.getId()) {
+                        case R.id.bApplyJob:
+                            serverRequests.applyForJob(receivedUser.getEmail(), receivedUser.getName(), jobID.getText().toString(), jobPos.getText().toString());
+                    }
+                }
             }
         }
     }
@@ -197,13 +204,13 @@ public class JobFinder extends AppCompatActivity {
 
         EditText searchJob;
         ImageView searchImage;
-        ListView searchJobListView;
+        RecyclerView searchJobListView;
         ArrayList<Job> arrayJob;
         ServerRequests serverRequests;
         Context parentActivity;
         UserLocalStore userLocalStore;
         TextView noJobSearch;
-        ArrayAdapter<Job> jobArrayAdapter;
+        MyJobRecyclerAdapter jobArrayAdapter;
         User receivedUser;
 
         @Override
@@ -227,9 +234,10 @@ public class JobFinder extends AppCompatActivity {
                     searchJob();
                 }
             });
-            searchJobListView = (ListView) v.findViewById(R.id.searchJobListView);
+            searchJobListView = (RecyclerView) v.findViewById(R.id.recyclerView);
             arrayJob = new ArrayList<>();
-            jobArrayAdapter = new MyJobAdapter(parentActivity, arrayJob);
+            jobArrayAdapter = new MyJobRecyclerAdapter(arrayJob);
+            searchJobListView.setLayoutManager(new LinearLayoutManager(getContext()));
             searchJobListView.setAdapter(jobArrayAdapter);
             return v;
         }
@@ -246,7 +254,7 @@ public class JobFinder extends AppCompatActivity {
                         for (int i = 0; i < returnedJobs.length; i++) {
                             arrayJob.add(i, returnedJobs[i]);
                         }
-                        jobArrayAdapter = new MyJobAdapter(parentActivity, arrayJob);
+                        jobArrayAdapter = new MyJobRecyclerAdapter(arrayJob);
                         searchJobListView.setAdapter(jobArrayAdapter);
                         jobArrayAdapter.notifyDataSetChanged();
                     }
@@ -254,56 +262,65 @@ public class JobFinder extends AppCompatActivity {
             });
         }
 
-        private class MyJobAdapter extends ArrayAdapter<Job> {
+        private class MyJobRecyclerAdapter extends RecyclerView.Adapter<MyJobRecyclerAdapter.ViewHolder> {
 
-            ArrayList<Job> arrayJobs;
-            Job temp;
+            ArrayList<Job> arrayJob = new ArrayList<>();
 
-            public MyJobAdapter(Context context, ArrayList<Job> arrayJobs) {
-                super(context, R.layout.job_search_listview, arrayJobs);
-                this.arrayJobs = arrayJobs;
+            public MyJobRecyclerAdapter(ArrayList<Job> jl) {
+                arrayJob = jl;
             }
 
             @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                if (convertView == null) {
-                    System.out.println("View is null, inflating");
-
-                    LayoutInflater vi = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    convertView = vi.inflate(R.layout.job_search_listview, null);
-                    System.out.println("View has been inflated");
-                }
-                System.out.println("View not null");
-                TextView returnedJobID = (TextView) convertView.findViewById(R.id.returnedJobID);
-                TextView returnedJobDomain = (TextView) convertView.findViewById(R.id.returnedJobDomain);
-                TextView returnedJobPosition = (TextView) convertView.findViewById(R.id.returnedJobPosition);
-                TextView returnedJobDescription = (TextView) convertView.findViewById(R.id.returnedJobDescription);
-                TextView returnedJobExperience = (TextView) convertView.findViewById(R.id.returnedJobExperience);
-                TextView returnedJobLocation = (TextView) convertView.findViewById(R.id.returnedJobLocation);
-                TextView returnedJobRemarks = (TextView) convertView.findViewById(R.id.returnedJobRemarks);
-                Button applyForJob = (Button) convertView.findViewById(R.id.bApplyJob);
-                temp = arrayJobs.get(position);
-                System.out.println("Received id " + temp.getID());
-                returnedJobID.setText(temp.getID());
-                returnedJobDomain.setText(temp.getID());
-                returnedJobID.setText(temp.getType());
-                returnedJobPosition.setText(temp.getPosition());
-                returnedJobDescription.setText(temp.getDescription());
-                returnedJobExperience.setText(temp.getExperience());
-                returnedJobLocation.setText(temp.getLocation());
-                returnedJobRemarks.setText(temp.getRemarks());
-
-                applyForJob.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        applyForJob();
-                    }
-                });
-                return convertView;
+            public MyJobRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                LayoutInflater li = LayoutInflater.from(parent.getContext());
+                View inflatedView = li.inflate(R.layout.job_item_list, parent, false);
+                ViewHolder VH = new ViewHolder(inflatedView);
+                return VH;
             }
 
-            public void applyForJob() {
-                serverRequests.applyForJob(receivedUser.getEmail(), receivedUser.getName(), temp.getID(), temp.getPosition());
+            @Override
+            public void onBindViewHolder(ViewHolder holder, int position) {
+                Job currentJob = arrayJob.get(position);
+                holder.jobDesc.setText("Job Description: " + currentJob.getDescription());
+                holder.jobID.setText("ID: " + currentJob.getID());
+                holder.jobRemarks.setText("Remarks: " + currentJob.getRemarks());
+                holder.jobExp.setText("Experience Reqd: " + currentJob.getExperience() + " years");
+                holder.jobDomain.setText("Domain: " + currentJob.getDomain());
+                holder.jobLoc.setText("Location: " + currentJob.getLocation());
+                holder.jobType.setText("Type: " + currentJob.getType());
+                holder.jobPos.setText("Position: " + currentJob.getPosition());
+            }
+
+            @Override
+            public int getItemCount() {
+                return arrayJob.size();
+            }
+
+            public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+                TextView jobID, jobDesc, jobType, jobLoc, jobPos, jobRemarks, jobExp, jobDomain;
+                Button applyForJob;
+
+                public ViewHolder(View itemView) {
+                    super(itemView);
+                    jobID = (TextView) itemView.findViewById(R.id.returnedJobID);
+                    jobDesc = (TextView) itemView.findViewById(R.id.returnedJobDescription);
+                    jobLoc = (TextView) itemView.findViewById(R.id.returnedJobLocation);
+                    jobType = (TextView) itemView.findViewById(R.id.returnedJobType);
+                    jobPos = (TextView) itemView.findViewById(R.id.returnedJobPosition);
+                    jobRemarks = (TextView) itemView.findViewById(R.id.returnedJobRemarks);
+                    jobExp = (TextView) itemView.findViewById(R.id.returnedJobExperience);
+                    jobDomain = (TextView) itemView.findViewById(R.id.returnedJobDomain);
+                    applyForJob = (Button) itemView.findViewById(R.id.bApplyJob);
+                    applyForJob.setOnClickListener(this);
+                }
+
+                @Override
+                public void onClick(View v) {
+                    switch (v.getId()) {
+                        case R.id.bApplyJob:
+                            serverRequests.applyForJob(receivedUser.getEmail(), receivedUser.getName(), jobID.getText().toString(), jobPos.getText().toString());
+                    }
+                }
             }
         }
     }

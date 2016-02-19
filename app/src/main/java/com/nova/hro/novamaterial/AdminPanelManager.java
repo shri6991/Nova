@@ -303,7 +303,7 @@ public class AdminPanelManager {
             Button editJob, saveEdit, discardEdit;
 
             public MyJobAdapter(Context context, ArrayList<Job> arrayJobs) {
-                super(context, R.layout.job_search_listview, arrayJobs);
+                super(context, R.layout.job_item_list, arrayJobs);
                 this.arrayJobs = arrayJobs;
             }
 

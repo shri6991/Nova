@@ -6,8 +6,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/app_bar"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
         android:animateLayoutChanges="true"
         android:orientation="vertical">
 
@@ -20,14 +18,12 @@
             android:text="No Jobs currently match your profile\n Check again later"
             android:visibility="gone" />
 
-        <ListView
-            android:id="@+id/jobListView"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/suggestedJobsRecycler"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginBottom="10dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="20dp"
             android:animateLayoutChanges="true" />
     </LinearLayout>
 

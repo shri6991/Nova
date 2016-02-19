@@ -259,7 +259,6 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
                 captureImageView.setImageBitmap(decoded);
                 decoded = RoundedImageView.getCroppedBitmap(decoded, 35);
                 headerImageView.setImageBitmap(decoded);
-
             } else
                 captureImageView.setImageResource(R.drawable.drawable);
             super.onPostExecute(aVoid);

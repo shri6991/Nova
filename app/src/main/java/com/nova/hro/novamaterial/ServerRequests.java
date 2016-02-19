@@ -14,11 +14,13 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -174,7 +176,8 @@ public class ServerRequests {
     }
 
     public void negativeAlert(String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context).setTitle("Unsuccessful!")
+        AlertDialog.Builder builder = new AlertDialog.Builder(context)
+                .setTitle("Unsuccessful!")
                 .setMessage(message)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -1126,6 +1129,10 @@ public class ServerRequests {
                     returnedJobs[i] = new Job(jsonObject.getString("id"), jsonObject.getString("domain"), jsonObject.getString("position"), jsonObject.getString("type"), jsonObject.getString("description"), jsonObject.getString("experience"), jsonObject.getString("location"), jsonObject.getString("remarks"));
                 }
             } catch (Exception e) {
+                if (e instanceof IOException)
+                    Toast.makeText(context, "Connection to server failed", Toast.LENGTH_SHORT).show();
+                if (e instanceof JSONException)
+                    negativeAlert("There are no jobs currently matching your profile. Please check again later");
                 e.printStackTrace();
             }
             return returnedJobs;
@@ -1134,8 +1141,6 @@ public class ServerRequests {
         @Override
         protected void onPostExecute(Job[] returnedJobs) {
             progressDialog.dismiss();
-            if (returnedJobs == null)
-                negativeAlert("There are no jobs currently matching your profile. Please check again later");
             getJobObjectsCallBack.done(returnedJobs);
             super.onPostExecute(returnedJobs);
         }
