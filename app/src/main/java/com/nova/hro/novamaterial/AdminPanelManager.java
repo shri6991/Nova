@@ -1,9 +1,10 @@
 package com.nova.hro.novamaterial;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,14 +31,14 @@ public class AdminPanelManager {
         EditText etSearch;
         ArrayList<User> arrayUser;
         ServerRequests serverRequests;
-        Activity parentActivity;
+        Context parentActivity;
         ArrayAdapter<User> userArrayAdapter;
 
         public FragmentQueryDB() {
         }
 
         @Override
-        public void onAttach(Activity activity) {
+        public void onAttach(Context activity) {
             super.onAttach(activity);
             serverRequests = new ServerRequests(activity);
             parentActivity = activity;
@@ -144,7 +144,7 @@ public class AdminPanelManager {
         ServerRequests serverRequests;
         Spinner jobType;
         String jtype = "Contract";
-        Activity parentActivity;
+        Context parentActivity;
         String[] openings = {"Sales", "Marketing", "Advertising", "Business Development", "Accounts", "Finance", "Treasury", "Audit", "Compliance", "Taxation", "Procurement", "Manufacturing", "Quality", "IT Networking", "Software Development", "Java", "Database Administration", "SQL server", "Oracle", "mySQL", "Progress", "DB2", "Mainframe Technologies", "HR operations", "Learning", "Talent Management", "OD", "HR Compliances", "Compensation & Benefits", "Storage Management", "IT Infrastructure Mangement", "Big Data", "Web Development", "Analytics", "General Management", "Microsoft Technologies", "SAP", "Oracle ERP", "Peoplesoft", "ERP - Other", "Cloud Technologies", "Administrator - UNIX", "Administrator - AIX", "Administrator - Windows", "Weblogic", "Websphere", "Tuxedo", "Business Intelligence Tools", "Hyperion", "MSBI", "CRM", "Android", "iOS", "AWS", "Microsoft Azure", "Investment Banking", "Corporate Banking", "Retail Banking", "Fund Management", "Wealth Management", "Stock Broking", "Commodity Broking", "Backoffice Jobs", "General Administration", "Teaching", "Others- specify"};
         String[] experience = {"Fresher", "1 year", "2 years", "3 years", "4 years", "5 years", "6 years", "7 years", "8 years", "9 years", "10 years", "11 years", "12 years", "13 years", "14 years", "15 years", "16 years", "17 years", "18 years", "19 years", "20 years", "21 years", "22 years", "23 years", "24 years", "25 years", "More than 25 years"};
         String[] type = {"Contract Job", "Permanent Job"};
@@ -153,7 +153,7 @@ public class AdminPanelManager {
         }
 
         @Override
-        public void onAttach(Activity activity) {
+        public void onAttach(Context activity) {
             super.onAttach(activity);
             parentActivity = activity;
         }
@@ -232,45 +232,44 @@ public class AdminPanelManager {
         }
     }
 
-    public static class JobEditor extends Fragment {
+    public static class EditJob extends Fragment {
 
-        EditText searchJob;
-        ImageView searchImage;
-        ListView searchJobListView;
-        ArrayList<Job> arrayJob;
         ServerRequests serverRequests;
-        Activity parentActivity;
         UserLocalStore userLocalStore;
-        TextView noJobSearch;
-        ArrayAdapter<Job> jobArrayAdapter;
         User receivedUser;
+        EditText searchJob;
+        ImageView searchBtn;
+        RecyclerView editJobRecycler;
+        MyRecyclerAdapter editJobAdapter;
+        ArrayList<Job> arrayJob;
+        TextView noJobSearch;
 
         @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            parentActivity = activity;
-            serverRequests = new ServerRequests(activity);
-            userLocalStore = new UserLocalStore(activity);
+        public void onAttach(Context context) {
+            super.onAttach(context);
+            serverRequests = new ServerRequests(context);
+            userLocalStore = new UserLocalStore(context);
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View v = inflater.inflate(R.layout.fragment_search_job, container, false);
-            searchJob = (EditText) v.findViewById(R.id.searchJobEditText);
-            searchImage = (ImageView) v.findViewById(R.id.searchJobImage);
+            View view = inflater.inflate(R.layout.fragment_edit_job, container, false);
             receivedUser = userLocalStore.getAllDetails();
-            noJobSearch = (TextView) v.findViewById(R.id.noJobSearch);
-            searchImage.setOnClickListener(new View.OnClickListener() {
+            arrayJob = new ArrayList<>();
+            noJobSearch = (TextView) view.findViewById(R.id.noJobEdit);
+            searchJob = (EditText) view.findViewById(R.id.etEditJob);
+            searchBtn = (ImageView) view.findViewById(R.id.editJobImage);
+            editJobRecycler = (RecyclerView) view.findViewById(R.id.jobEditRecycler);
+            editJobAdapter = new MyRecyclerAdapter(arrayJob);
+            editJobRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+            editJobRecycler.setAdapter(editJobAdapter);
+            searchBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     searchJob();
                 }
             });
-            searchJobListView = (ListView) v.findViewById(R.id.searchJobListView);
-            arrayJob = new ArrayList<>();
-            jobArrayAdapter = new MyJobAdapter(parentActivity, arrayJob);
-            searchJobListView.setAdapter(jobArrayAdapter);
-            return v;
+            return view;
         }
 
         public void searchJob() {
@@ -285,155 +284,69 @@ public class AdminPanelManager {
                         for (int i = 0; i < returnedJobs.length; i++) {
                             arrayJob.add(i, returnedJobs[i]);
                         }
-                        jobArrayAdapter = new MyJobAdapter(parentActivity, arrayJob);
-                        searchJobListView.setAdapter(jobArrayAdapter);
+                        editJobAdapter.notifyDataSetChanged();
                     }
                 }
             });
         }
 
-        private class MyJobAdapter extends ArrayAdapter<Job> {
+        private class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.VH> {
 
-            LinearLayout show, edit;
-            ArrayList<Job> arrayJobs;
-            int status = 0;
-            int position;
-            Job temp;
-            EditText returnedJobID1, returnedJobDomain1, returnedJobPosition1, returnedJobExperience1, returnedJobDescription1, returnedJobLocation1, returnedJobRemarks1;
-            Button editJob, saveEdit, discardEdit;
+            ArrayList<Job> jobArray;
 
-            public MyJobAdapter(Context context, ArrayList<Job> arrayJobs) {
-                super(context, R.layout.job_item_list, arrayJobs);
-                this.arrayJobs = arrayJobs;
+            public MyRecyclerAdapter(ArrayList<Job> jl) {
+                jobArray = jl;
             }
 
             @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                if (convertView == null) {
-                    System.out.println("View is null, inflating");
-
-                    LayoutInflater vi = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    convertView = vi.inflate(R.layout.job_edit_listview, null);
-                    System.out.println("View has been inflated");
-                }
-                System.out.println("View not null");
-                this.position = position;
-                TextView returnedJobID = (TextView) convertView.findViewById(R.id.returnedJobID);
-                TextView returnedJobType = (TextView) convertView.findViewById(R.id.returnedJobType);
-                TextView returnedJobDomain = (TextView) convertView.findViewById(R.id.returnedJobDomain);
-                TextView returnedJobPosition = (TextView) convertView.findViewById(R.id.returnedJobPosition);
-                TextView returnedJobDescription = (TextView) convertView.findViewById(R.id.returnedJobDescription);
-                TextView returnedJobExperience = (TextView) convertView.findViewById(R.id.returnedJobExperience);
-                TextView returnedJobLocation = (TextView) convertView.findViewById(R.id.returnedJobLocation);
-                TextView returnedJobRemarks = (TextView) convertView.findViewById(R.id.returnedJobRemarks);
-
-                returnedJobID1 = (EditText) convertView.findViewById(R.id.etreturnedJobID);
-                returnedJobDomain1 = (EditText) convertView.findViewById(R.id.etreturnedJobDomain);
-                returnedJobPosition1 = (EditText) convertView.findViewById(R.id.etreturnedJobPosition);
-                returnedJobDescription1 = (EditText) convertView.findViewById(R.id.etreturnedJobDescription);
-                returnedJobExperience1 = (EditText) convertView.findViewById(R.id.etreturnedJobExperience);
-                returnedJobLocation1 = (EditText) convertView.findViewById(R.id.etreturnedJobLocation);
-                returnedJobRemarks1 = (EditText) convertView.findViewById(R.id.etreturnedJobRemarks);
-
-                editJob = (Button) convertView.findViewById(R.id.bEditJob);
-                saveEdit = (Button) convertView.findViewById(R.id.bSaveEdit);
-                discardEdit = (Button) convertView.findViewById(R.id.bDiscardEdit);
-                temp = arrayJobs.get(position);
-                System.out.println("Received id " + temp.getID());
-
-                returnedJobID.setText(temp.getID());
-                returnedJobDomain.setText(temp.getDomain());
-                returnedJobType.setText(temp.getType());
-                returnedJobPosition.setText(temp.getPosition());
-                returnedJobDescription.setText(temp.getDescription());
-                returnedJobExperience.setText(temp.getExperience());
-                returnedJobLocation.setText(temp.getLocation());
-                returnedJobRemarks.setText(temp.getRemarks());
-
-                returnedJobID1.setText(temp.getID());
-                returnedJobDomain1.setText(temp.getDomain());
-                returnedJobPosition1.setText(temp.getPosition());
-                returnedJobDescription1.setText(temp.getDescription());
-                returnedJobExperience1.setText(temp.getExperience());
-                returnedJobLocation1.setText(temp.getLocation());
-                returnedJobRemarks1.setText(temp.getRemarks());
-
-                if (status == 2) {
-                    show.setVisibility(View.GONE);
-                    edit.setVisibility(View.VISIBLE);
-                }
-                if (status == 1) {
-                    show.setVisibility(View.VISIBLE);
-                    edit.setVisibility(View.GONE);
-                }
-                show = (LinearLayout) convertView.findViewById(R.id.jobViewLayout);
-                edit = (LinearLayout) convertView.findViewById(R.id.jobEditLayout);
-
-                editJob.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showEditJob();
-                    }
-                });
-
-                saveEdit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        saveEditJob();
-                    }
-                });
-
-                discardEdit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        discardEditJob();
-                    }
-                });
-
-                return convertView;
+            public VH onCreateViewHolder(ViewGroup parent, int viewType) {
+                LayoutInflater li = LayoutInflater.from(parent.getContext());
+                View v = li.inflate(R.layout.job_edit_listview, parent);
+                return new VH(v);
             }
 
-            public void showEditJob() {
-                status = 2;
-                View view = searchJobListView.getChildAt(position);
-                //show = (LinearLayout)view.findViewById(R.id.jobViewLayout);
-                //edit = (LinearLayout)view.findViewById(R.id.jobEditLayout);
-                show.setVisibility(View.GONE);
-                edit.setVisibility(View.VISIBLE);
-                notifyDataSetChanged();
+            @Override
+            public void onBindViewHolder(VH holder, int position) {
+                Job current = jobArray.get(position);
+                holder.jobID.setText(current.getID());
+                holder.jobDescription.setText(current.getDescription());
+                holder.jobDomain.setText(current.getDomain());
+                holder.jobExperience.setText(current.getExperience());
+                holder.jobRemarks.setText(current.getRemarks());
+                holder.jobLocation.setText(current.getLocation());
+                holder.jobPosition.setText(current.getID());
             }
 
-            public void saveEditJob() {
-                View view = searchJobListView.getChildAt(position);
-                returnedJobID1 = (EditText) view.findViewById(R.id.etreturnedJobID);
-                returnedJobDomain1 = (EditText) view.findViewById(R.id.etreturnedJobDomain);
-                returnedJobPosition1 = (EditText) view.findViewById(R.id.etreturnedJobPosition);
-                returnedJobDescription1 = (EditText) view.findViewById(R.id.etreturnedJobDescription);
-                returnedJobExperience1 = (EditText) view.findViewById(R.id.etreturnedJobExperience);
-                returnedJobLocation1 = (EditText) view.findViewById(R.id.etreturnedJobLocation);
-                returnedJobRemarks1 = (EditText) view.findViewById(R.id.etreturnedJobRemarks);
-                serverRequests.updateJob(new Job(returnedJobID1.getText().toString(), returnedJobDomain1.getText().toString(), returnedJobPosition1.getText().toString(), temp.getType(), returnedJobExperience1.getText().toString(), returnedJobDescription1.getText().toString(), returnedJobLocation1.getText().toString(), returnedJobRemarks1.getText().toString()), new GetJobCallBack() {
-                    @Override
-                    public void done(Job returnedJob) {
-                        discardEditJob();
-                    }
-                });
+            @Override
+            public int getItemCount() {
+                return jobArray.size();
             }
 
-            public void discardEditJob() {
-                View view = searchJobListView.getChildAt(position);
-                status = 1;
-                show.setVisibility(View.VISIBLE);
-                edit.setVisibility(View.GONE);
-                returnedJobID1.setText("");
-                returnedJobDomain1.setText("");
-                returnedJobPosition1.setText("");
-                returnedJobExperience1.setText("");
-                returnedJobDescription1.setText("");
-                returnedJobLocation1.setText("");
-                returnedJobRemarks1.setText("");
-                notifyDataSetChanged();
+            public class VH extends RecyclerView.ViewHolder {
+                TextView jobID, jobPosition, jobExperience, jobRemarks, jobLocation, jobDescription, jobDomain;
+                EditText etjobID, etjobPosition, etjobExperience, etjobRemarks, etjobLocation, etjobDescription, etjobDomain;
+                Button bEditJob;
+
+                public VH(View v) {
+                    super(v);
+                    jobID = (TextView) v.findViewById(R.id.returnedJobID);
+                    jobExperience = (TextView) v.findViewById(R.id.returnedJobExperience);
+                    jobRemarks = (TextView) v.findViewById(R.id.returnedJobRemarks);
+                    jobLocation = (TextView) v.findViewById(R.id.returnedJobLocation);
+                    jobDescription = (TextView) v.findViewById(R.id.returnedJobDescription);
+                    jobDomain = (TextView) v.findViewById(R.id.returnedJobDomain);
+                    jobPosition = (TextView) v.findViewById(R.id.returnedJobPosition);
+                    etjobID = (EditText) v.findViewById(R.id.etreturnedJobID);
+                    etjobPosition = (EditText) v.findViewById(R.id.etreturnedJobPosition);
+                    etjobExperience = (EditText) v.findViewById(R.id.etreturnedJobExperience);
+                    etjobRemarks = (EditText) v.findViewById(R.id.etreturnedJobRemarks);
+                    etjobLocation = (EditText) v.findViewById(R.id.etreturnedJobLocation);
+                    etjobDescription = (EditText) v.findViewById(R.id.etreturnedJobDescription);
+                    etjobDomain = (EditText) v.findViewById(R.id.etreturnedJobDomain);
+                    bEditJob = (Button) v.findViewById(R.id.bEditJob);
+                }
             }
         }
     }
+
 }

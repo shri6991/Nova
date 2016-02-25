@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/earth">
 
     <include
         android:id="@+id/app_bar"
@@ -21,135 +22,135 @@
 
             <TextView
                 android:id="@+id/textView6"
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:text="WORK INTERESTS"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="WORK HISTORY"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="19sp" />
 
             <TextView
                 android:id="@+id/textView"
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginLeft="10dp"
-                android:text="What kind of opening are you looking for?"
-                android:textColor="@color/colorAccent"
-                android:textSize="17sp" />
+                android:layout_height="45dp"
+                android:layout_marginBottom="5dp"
+                android:text="Desired Opening(Field)"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <AutoCompleteTextView
                 android:id="@+id/spinnerOpening"
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="7dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="10dp"
                 android:clickable="true"
                 android:spinnerMode="dropdown" />
 
             <TextView
                 android:id="@+id/textView2"
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
                 android:text="Years of experience"
-                android:textColor="@color/colorAccent"
-                android:textSize="17sp" />
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/spinnerExp"
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginBottom="7dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
                 android:clickable="true"
                 android:gravity="center_horizontal"
                 android:spinnerMode="dropdown" />
 
             <TextView
                 android:id="@+id/textView3"
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
                 android:text="Current Location"
-                android:textColor="@color/colorAccent"
-                android:textSize="17sp" />
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <AutoCompleteTextView
                 android:id="@+id/textViewCurloc"
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="7dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="10dp"
                 android:clickable="true"
                 android:gravity="center"
                 android:spinnerMode="dropdown" />
 
             <TextView
                 android:id="@+id/textView4"
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
                 android:text="Desired Location"
-                android:textColor="@color/colorAccent"
-                android:textSize="17sp" />
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <AutoCompleteTextView
                 android:id="@+id/textViewDesLoc"
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="7dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="10dp"
                 android:clickable="true"
                 android:gravity="center"
                 android:spinnerMode="dropdown" />
 
             <TextView
                 android:id="@+id/textView5"
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
                 android:text="PREVIOUS WORK DETAILS"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="19sp" />
 
             <TextView
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:text="Current Company Details"
-                android:textColor="@color/colorAccent"
-                android:textSize="17sp" />
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/com1name"
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="3dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="5dp"
                 android:hint="Company Name"
                 android:textSize="17sp" />
 
             <EditText
                 android:id="@+id/com1pos"
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="3dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="5dp"
                 android:hint="Position Held"
                 android:textSize="17sp" />
 
@@ -159,11 +160,11 @@
 
                 <EditText
                     android:id="@+id/com1from"
-                    style="@style/FloatingTextView"
+                    style="@style/RoundedTextView"
                     android:layout_width="180dp"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="18dp"
                     android:layout_marginRight="0dp"
                     android:hint="FROM: (dd/mm/yy)"
                     android:inputType="date"
@@ -171,10 +172,10 @@
 
                 <EditText
                     android:id="@+id/com1to"
-                    style="@style/FloatingTextView"
+                    style="@style/RoundedTextView"
                     android:layout_width="180dp"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="2dp"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@id/com1from"
                     android:hint="TO: (dd/mm/yy)"
@@ -184,7 +185,7 @@
 
             <EditText
                 android:id="@+id/com1resp"
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginBottom="10dp"
@@ -195,30 +196,30 @@
                 android:scrollHorizontally="false" />
 
             <TextView
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
                 android:text="Previous Company Details"
                 android:textColor="@color/colorAccent"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/com2name"
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="3dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="5dp"
                 android:hint="Company Name"
                 android:textSize="17sp" />
 
             <EditText
                 android:id="@+id/com2pos"
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="3dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="5dp"
                 android:hint="Position Held" />
 
             <RelativeLayout
@@ -227,11 +228,11 @@
 
                 <EditText
                     android:id="@+id/com2from"
-                    style="@style/FloatingTextView"
+                    style="@style/RoundedTextView"
                     android:layout_width="180dp"
-                    android:layout_height="40dp"
+                    android:layout_height="45dp"
                     android:layout_marginBottom="2dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="18dp"
                     android:layout_marginRight="0dp"
                     android:hint="FROM: (dd/mm/yy)"
                     android:inputType="date"
@@ -239,9 +240,9 @@
 
                 <EditText
                     android:id="@+id/com2to"
-                    style="@style/FloatingTextView"
+                    style="@style/RoundedTextView"
                     android:layout_width="180dp"
-                    android:layout_height="40dp"
+                    android:layout_height="45dp"
                     android:layout_marginBottom="2dp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@id/com2from"
@@ -252,11 +253,11 @@
 
             <EditText
                 android:id="@+id/com2resp"
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
                 android:hint="Responsibilities"
                 android:lines="2"
                 android:maxLines="5"
@@ -265,31 +266,31 @@
 
             <TextView
                 android:id="@+id/textView7"
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:text="Previous to Previous Company Details"
-                android:textColor="@color/colorAccent"
-                android:textSize="17sp" />
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/com3name"
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="3dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="5dp"
                 android:hint="Company Name"
                 android:textSize="17sp" />
 
             <EditText
                 android:id="@+id/com3pos"
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="3dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="5dp"
                 android:hint="Position Held"
                 android:textSize="17sp" />
 
@@ -299,11 +300,11 @@
 
                 <EditText
                     android:id="@+id/com3from"
-                    style="@style/FloatingTextView"
+                    style="@style/RoundedTextView"
                     android:layout_width="180dp"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="18dp"
                     android:layout_marginRight="0dp"
                     android:hint="FROM: (dd/mm/yy)"
                     android:inputType="date"
@@ -311,10 +312,10 @@
 
                 <EditText
                     android:id="@+id/com3to"
-                    style="@style/FloatingTextView"
+                    style="@style/RoundedTextView"
                     android:layout_width="180dp"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="2dp"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@id/com3from"
                     android:hint="TO: (dd/mm/yy)"
@@ -324,11 +325,11 @@
 
             <EditText
                 android:id="@+id/com3resp"
-                style="@style/FloatingTextView"
+                style="@style/RoundedTextView"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="5dp"
                 android:hint="Responsibilities"
                 android:lines="2"
                 android:maxLines="5"
@@ -337,13 +338,13 @@
 
             <Button
                 android:id="@+id/bregproceed"
-                style="@style/Button"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="30dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:background="@drawable/rounded_button_blue"
                 android:onClick="RegisterFinal"
                 android:text="Confirm and Register"
                 android:textSize="17sp" />

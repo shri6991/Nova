@@ -1,122 +1,126 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true">
 
-
-    <EditText
-        android:id="@+id/addID"
-        style="@style/FloatingTextView"
-        android:layout_width="350dp"
-        android:layout_height="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:hint="JOB ID"
-        android:textColor="@color/colorAccentDark"
-        android:textColorHint="@color/colorAccentDark" />
-
-    <AutoCompleteTextView
-        android:id="@+id/addDomain"
-        style="@style/FloatingTextView"
-        android:layout_width="350dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/addID"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:hint="JOB DOMAIN"
-        android:textSize="16sp" />
-
-    <EditText
-        android:id="@+id/addPosition"
-        style="@style/FloatingTextView"
-        android:layout_width="350dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/addDomain"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:hint="POSITION"
-        android:textSize="16sp" />
-
-    <Spinner
-        android:id="@+id/addType"
-        style="@style/FloatingTextView"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/addPosition"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp" />
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/addDescription"
-        style="@style/FloatingTextView"
-        android:layout_width="350dp"
-        android:layout_height="80dp"
-        android:layout_below="@+id/addType"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:hint="JOB DESCRIPTION"
-        android:lines="4"
-        android:maxLines="5"
-        android:scrollHorizontally="false"
-        android:textSize="16sp" />
+        <EditText
+            android:id="@+id/addID"
+            style="@style/FloatingTextView"
+            android:layout_width="350dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:hint="JOB ID"
+            android:textColor="@color/colorAccentDark"
+            android:textColorHint="@color/colorAccentDark" />
 
-    <AutoCompleteTextView
-        android:id="@+id/addExperience"
-        style="@style/FloatingTextView"
-        android:layout_width="350dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/addDescription"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:hint="EXPERIENCE NEEDED"
-        android:textSize="16sp" />
+        <AutoCompleteTextView
+            android:id="@+id/addDomain"
+            style="@style/FloatingTextView"
+            android:layout_width="350dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/addID"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:hint="JOB DOMAIN"
+            android:textSize="16sp" />
 
-    <AutoCompleteTextView
-        android:id="@+id/addLocation"
-        style="@style/FloatingTextView"
-        android:layout_width="350dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/addExperience"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:hint="LOCATION"
-        android:textSize="16sp" />
+        <EditText
+            android:id="@+id/addPosition"
+            style="@style/FloatingTextView"
+            android:layout_width="350dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/addDomain"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:hint="POSITION"
+            android:textSize="16sp" />
 
-    <EditText
-        android:id="@+id/addRemarks"
-        style="@style/FloatingTextView"
-        android:layout_width="350dp"
-        android:layout_height="67dp"
-        android:layout_below="@+id/addLocation"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:hint="REMARKS"
-        android:lines="3"
-        android:maxLines="5"
-        android:scrollHorizontally="false"
-        android:textSize="16sp" />
+        <Spinner
+            android:id="@+id/addType"
+            style="@style/FloatingTextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/addPosition"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp" />
 
-    <Button
-        android:id="@+id/bSaveNewJob"
-        style="@style/Button"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/addRemarks"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginTop="15dp"
-        android:text="SAVE" />
+        <EditText
+            android:id="@+id/addDescription"
+            style="@style/FloatingTextView"
+            android:layout_width="350dp"
+            android:layout_height="80dp"
+            android:layout_below="@+id/addType"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:hint="JOB DESCRIPTION"
+            android:lines="4"
+            android:maxLines="5"
+            android:scrollHorizontally="false"
+            android:textSize="16sp" />
 
-    <Button
-        android:id="@+id/DiscardNewJob"
-        style="@style/ButtonRed"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/addRemarks"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_toRightOf="@id/bSaveNewJob"
-        android:text="DISCARD" />
+        <AutoCompleteTextView
+            android:id="@+id/addExperience"
+            style="@style/FloatingTextView"
+            android:layout_width="350dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/addDescription"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:hint="EXPERIENCE NEEDED"
+            android:textSize="16sp" />
 
-</RelativeLayout>
+        <AutoCompleteTextView
+            android:id="@+id/addLocation"
+            style="@style/FloatingTextView"
+            android:layout_width="350dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/addExperience"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:hint="LOCATION"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/addRemarks"
+            style="@style/FloatingTextView"
+            android:layout_width="350dp"
+            android:layout_height="67dp"
+            android:layout_below="@+id/addLocation"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:hint="REMARKS"
+            android:lines="3"
+            android:maxLines="5"
+            android:scrollHorizontally="false"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/bSaveNewJob"
+            style="@style/Button"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/addRemarks"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="15dp"
+            android:text="SAVE" />
+
+        <Button
+            android:id="@+id/DiscardNewJob"
+            style="@style/ButtonRed"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/addRemarks"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/bSaveNewJob"
+            android:text="DISCARD" />
+    </RelativeLayout>
+
+</ScrollView>

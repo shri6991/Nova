@@ -6,7 +6,6 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         style="@style/FloatingTextView"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
@@ -40,14 +39,31 @@
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:alpha="0.3"
+                android:background="#000" />
+
             <TextView
                 android:id="@+id/returnedJobDomain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:alpha="0.3"
+                android:background="#000" />
 
             <TextView
                 android:id="@+id/returnedJobPosition"
@@ -55,8 +71,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:alpha="0.3"
+                android:background="#000" />
 
             <TextView
                 android:id="@+id/returnedJobDescription"
@@ -64,8 +90,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:alpha="0.3"
+                android:background="#000" />
 
             <TextView
                 android:id="@+id/returnedJobExperience"
@@ -73,8 +108,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:alpha="0.3"
+                android:background="#000" />
 
             <TextView
                 android:id="@+id/returnedJobLocation"
@@ -82,8 +126,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:alpha="0.3"
+                android:background="#000" />
 
             <TextView
                 android:id="@+id/returnedJobRemarks"
@@ -91,21 +144,23 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Button
                 android:id="@+id/bEditJob"
                 style="@style/FloatingTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="5dp"
                 android:clickable="true"
                 android:elevation="0dp"
+                android:gravity="center"
                 android:text="EDIT JOB"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
+                android:textSize="17sp"
                 android:translationZ="0dp" />
         </LinearLayout>
 
@@ -129,6 +184,14 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:translationZ="0dp" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:alpha="0.3"
+                android:background="#000" />
+
             <EditText
                 android:id="@+id/etreturnedJobDomain"
                 style="@style/FloatingTextView"
@@ -141,6 +204,14 @@
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:translationZ="0dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:alpha="0.3"
+                android:background="#000" />
 
             <EditText
                 android:id="@+id/etreturnedJobPosition"
@@ -155,6 +226,14 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:translationZ="0dp" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:alpha="0.3"
+                android:background="#000" />
+
             <EditText
                 android:id="@+id/etreturnedJobDescription"
                 style="@style/FloatingTextView"
@@ -167,6 +246,14 @@
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:translationZ="0dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:alpha="0.3"
+                android:background="#000" />
 
             <EditText
                 android:id="@+id/etreturnedJobExperience"
@@ -181,6 +268,14 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:translationZ="0dp" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:alpha="0.3"
+                android:background="#000" />
+
             <EditText
                 android:id="@+id/etreturnedJobLocation"
                 style="@style/FloatingTextView"
@@ -193,6 +288,14 @@
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:translationZ="0dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:alpha="0.3"
+                android:background="#000" />
 
             <EditText
                 android:id="@+id/etreturnedJobRemarks"

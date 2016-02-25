@@ -10,7 +10,9 @@
         style="@style/FloatingTextView"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:animateLayoutChanges="true">
+        android:layout_marginTop="10dp"
+        android:animateLayoutChanges="true"
+        android:elevation="6dp">
 
         <EditText
             android:id="@+id/searchJobEditText"
@@ -18,7 +20,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_centerVertical="true"
-            android:layout_margin="1dp"
+            android:layout_margin="0.5dp"
             android:layout_toLeftOf="@id/searchDivider"
             android:elevation="0dp"
             android:hint="Enter a search term"
@@ -59,16 +61,8 @@
         android:text="No Jobs found matching your query"
         android:visibility="gone" />
 
-    <ListView
-        android:id="@+id/searchJobListView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:visibility="gone" />
-
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/jobSearchRecycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 </LinearLayout>

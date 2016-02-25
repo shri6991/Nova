@@ -2,40 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="5dp"
-    android:layout_marginTop="10dp"
     android:orientation="vertical">
 
     <RelativeLayout
         style="@style/FloatingTextView"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginTop="10dp"
         android:animateLayoutChanges="true"
         android:elevation="6dp">
 
         <EditText
-            android:id="@+id/searchBox"
+            android:id="@+id/etEditJob"
             style="@style/FloatingTextView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_centerVertical="true"
-            android:layout_margin="1dp"
-            android:layout_toLeftOf="@+id/searchDivider"
+            android:layout_margin="0.5dp"
+            android:layout_toLeftOf="@+id/editJobDivider"
             android:elevation="0dp"
             android:hint="Enter a search term"
             android:translationZ="0dp" />
 
         <View
-            android:id="@+id/searchDivider"
+            android:id="@+id/editJobDivider"
             android:layout_width="1dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/bSearch"
+            android:layout_toLeftOf="@+id/editJobImage"
             android:alpha="0.2"
             android:background="@color/Black" />
 
         <ImageView
-            android:id="@+id/bSearch"
+            android:id="@+id/editJobImage"
             style="@style/FloatingTextView"
             android:layout_width="47dp"
             android:layout_height="fill_parent"
@@ -50,11 +49,16 @@
             android:translationZ="0dp" />
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/searchListView"
+    <TextView
+        android:id="@+id/noJobEdit"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:animateLayoutChanges="true" />
+        android:layout_height="wrap_content"
+        android:text="No Jobs match your query"
+        android:visibility="gone" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/jobEditRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="2dp" />
 </LinearLayout>

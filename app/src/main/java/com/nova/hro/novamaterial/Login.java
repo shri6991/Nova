@@ -30,7 +30,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         String set = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
         String password = "";
         char tempChar;
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 8; i++) {
             tempChar = set.charAt(generator.nextInt(62));
             password += tempChar;
         }
@@ -82,7 +82,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     //Disables the back button
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
+        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+        homeIntent.addCategory(Intent.CATEGORY_HOME);
+        homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(homeIntent);
     }
 
     @Override

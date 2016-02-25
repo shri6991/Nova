@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.NavUtils;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +28,7 @@ public class JobFinder extends AppCompatActivity {
 
     AppBarLayout appBarLayout;
     Toolbar toolbar;
+    ViewPager mPager;
     TabLayout tabLayout;
 
     @Override
@@ -36,38 +40,11 @@ public class JobFinder extends AppCompatActivity {
         appBarLayout = (AppBarLayout) findViewById(R.id.appBarLayoutJob);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        mPager = (ViewPager) findViewById(R.id.jobViewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout_job);
-        tabLayout.addTab(tabLayout.newTab().setText("Search for a Job"));
-        tabLayout.addTab(tabLayout.newTab().setText("Suggested Jobs"));
-        Fragment initial = new JobFinder.JobSearcher();
-        getSupportFragmentManager()
-                .beginTransaction().replace(R.id.jobfinderscroll, initial).commit();
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                int position = tab.getPosition();
-                if (position == 0) {
-                    Fragment f1 = new JobFinder.JobSearcher();
-                    getSupportFragmentManager()
-                            .beginTransaction().replace(R.id.jobfinderscroll, f1).commit();
-                } else {
-                    Fragment f = new JobFinder.JobSuggester();
-                    getSupportFragmentManager()
-                            .beginTransaction().replace(R.id.jobfinderscroll, f).commit();
-                }
-            }
+        mPager.setAdapter(new JobPagerAdapter(getSupportFragmentManager()));
+        tabLayout.setupWithViewPager(mPager);
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
     }
 
     @Override
@@ -109,6 +86,7 @@ public class JobFinder extends AppCompatActivity {
             searchJobs.setLayoutManager(new LinearLayoutManager(getContext()));
             jobAdapter = new MyJobRecyclerAdapter(arrayJobs);
             searchJobs.setAdapter(jobAdapter);
+            searchJobs.setHasFixedSize(true);
             fetchJobListings();
             return v;
         }
@@ -234,11 +212,12 @@ public class JobFinder extends AppCompatActivity {
                     searchJob();
                 }
             });
-            searchJobListView = (RecyclerView) v.findViewById(R.id.recyclerView);
+            searchJobListView = (RecyclerView) v.findViewById(R.id.jobSearchRecycler);
             arrayJob = new ArrayList<>();
             jobArrayAdapter = new MyJobRecyclerAdapter(arrayJob);
             searchJobListView.setLayoutManager(new LinearLayoutManager(getContext()));
             searchJobListView.setAdapter(jobArrayAdapter);
+            searchJobListView.setHasFixedSize(true);
             return v;
         }
 
@@ -262,7 +241,7 @@ public class JobFinder extends AppCompatActivity {
             });
         }
 
-        private class MyJobRecyclerAdapter extends RecyclerView.Adapter<MyJobRecyclerAdapter.ViewHolder> {
+        public class MyJobRecyclerAdapter extends RecyclerView.Adapter<MyJobRecyclerAdapter.ViewHolder> {
 
             ArrayList<Job> arrayJob = new ArrayList<>();
 
@@ -284,7 +263,7 @@ public class JobFinder extends AppCompatActivity {
                 holder.jobDesc.setText("Job Description: " + currentJob.getDescription());
                 holder.jobID.setText("ID: " + currentJob.getID());
                 holder.jobRemarks.setText("Remarks: " + currentJob.getRemarks());
-                holder.jobExp.setText("Experience Reqd: " + currentJob.getExperience() + " years");
+                holder.jobExperience.setText("Experience Required: " + currentJob.getExperience() + " years");
                 holder.jobDomain.setText("Domain: " + currentJob.getDomain());
                 holder.jobLoc.setText("Location: " + currentJob.getLocation());
                 holder.jobType.setText("Type: " + currentJob.getType());
@@ -297,7 +276,7 @@ public class JobFinder extends AppCompatActivity {
             }
 
             public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-                TextView jobID, jobDesc, jobType, jobLoc, jobPos, jobRemarks, jobExp, jobDomain;
+                TextView jobID, jobDesc, jobType, jobLoc, jobPos, jobRemarks, jobExperience, jobDomain;
                 Button applyForJob;
 
                 public ViewHolder(View itemView) {
@@ -308,7 +287,7 @@ public class JobFinder extends AppCompatActivity {
                     jobType = (TextView) itemView.findViewById(R.id.returnedJobType);
                     jobPos = (TextView) itemView.findViewById(R.id.returnedJobPosition);
                     jobRemarks = (TextView) itemView.findViewById(R.id.returnedJobRemarks);
-                    jobExp = (TextView) itemView.findViewById(R.id.returnedJobExperience);
+                    jobExperience = (TextView) itemView.findViewById(R.id.returnedJobExperience);
                     jobDomain = (TextView) itemView.findViewById(R.id.returnedJobDomain);
                     applyForJob = (Button) itemView.findViewById(R.id.bApplyJob);
                     applyForJob.setOnClickListener(this);
@@ -322,6 +301,29 @@ public class JobFinder extends AppCompatActivity {
                     }
                 }
             }
+        }
+    }
+
+    private class JobPagerAdapter extends FragmentPagerAdapter {
+
+        public JobPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+        @Override
+        public Fragment getItem(int position) {
+            if (position == 0) return new JobFinder.JobSearcher();
+            else return new JobFinder.JobSuggester();
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            if (position == 0) return "Search for a Job";
+            else return "Suggested Jobs";
         }
     }
 }
