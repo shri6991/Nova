@@ -76,7 +76,7 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
             if (position == 0)
                 return new AdminPanelManager.FragmentNewJob();
             else if (position == 1)
-                return new AdminPanelManager.EditJob();
+                return new AdminPanelManager.JobEditor();
             return new AdminPanelManager.FragmentQueryDB();
         }
 

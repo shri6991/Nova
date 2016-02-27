@@ -61,6 +61,14 @@
         android:text="No Jobs found matching your query"
         android:visibility="gone" />
 
+    <ListView
+        android:id="@+id/searchJobListView"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:animateLayoutChanges="true" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/jobSearchRecycler"
         android:layout_width="match_parent"
