@@ -19,13 +19,14 @@
             android:layout_height="60dp"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="0dp"
-            android:text="JOB ID"
+            android:text="JOB Type"
             android:textColor="@color/White"
             android:textSize="21sp" />
 
         <LinearLayout
             android:id="@+id/jobViewLayout"
             android:layout_width="match_parent"
+            android:visibility="visible"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -36,6 +37,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -54,6 +57,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -72,7 +77,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="15dp"
-
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -92,6 +98,8 @@
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="15dp"
                 android:text="Medium Text"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <View
@@ -110,6 +118,8 @@
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="15dp"
                 android:text="Medium Text"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <View
@@ -128,6 +138,8 @@
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="15dp"
                 android:text="Medium Text"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <View
@@ -146,6 +158,8 @@
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="15dp"
                 android:text="Medium Text"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Button
@@ -171,15 +185,17 @@
             android:orientation="vertical"
             android:visibility="gone">
 
-            <EditText
+            <TextView
                 android:id="@+id/etreturnedJobID"
                 style="@style/FloatingTextView"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
                 android:elevation="0dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:translationZ="0dp" />
@@ -196,11 +212,12 @@
                 android:id="@+id/etreturnedJobDomain"
                 style="@style/FloatingTextView"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
                 android:elevation="0dp"
                 android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:translationZ="0dp" />
@@ -217,10 +234,11 @@
                 android:id="@+id/etreturnedJobPosition"
                 style="@style/FloatingTextView"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
                 android:elevation="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:gravity="center"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -238,11 +256,12 @@
                 android:id="@+id/etreturnedJobDescription"
                 style="@style/FloatingTextView"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
                 android:elevation="0dp"
                 android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:translationZ="0dp" />
@@ -259,10 +278,11 @@
                 android:id="@+id/etreturnedJobExperience"
                 style="@style/FloatingTextView"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
                 android:elevation="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:gravity="center"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -280,11 +300,12 @@
                 android:id="@+id/etreturnedJobLocation"
                 style="@style/FloatingTextView"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
                 android:elevation="0dp"
                 android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:translationZ="0dp" />
@@ -301,10 +322,11 @@
                 android:id="@+id/etreturnedJobRemarks"
                 style="@style/FloatingTextView"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
                 android:elevation="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:gravity="center"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -320,10 +342,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:layout_marginBottom="5dp"
                     android:layout_marginLeft="20dp"
                     android:clickable="true"
                     android:elevation="0dp"
+                    android:gravity="center"
                     android:text="SAVE"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp"

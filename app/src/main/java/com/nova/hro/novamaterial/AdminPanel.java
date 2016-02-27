@@ -7,17 +7,24 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 public class AdminPanel extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     Toolbar toolbar;
     NavigationView navView;
-    //DrawerLayout drawerLayout;
-    //ActionBarDrawerToggle drawerToggle;
+    DrawerLayout drawerLayout;
+    ActionBarDrawerToggle drawerToggle;
     ServerRequests serverRequests;
 
     @Override
@@ -28,16 +35,16 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
         setSupportActionBar(toolbar);
         toolbar.setTitle("Administrator Panel");
 
-        /*navView = (NavigationView) findViewById(R.id.nav_drawer);
+        navView = (NavigationView) findViewById(R.id.nav_drawer);
         navView.setNavigationItemSelectedListener(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_admin);
-        /drawerToggle = new ActionBarDrawerToggle(this,
+        drawerToggle = new ActionBarDrawerToggle(this,
                 drawerLayout,
                 toolbar,
                 R.string.drawer_open,
                 R.string.drawer_closed);
         drawerLayout.setDrawerListener(drawerToggle);
-        drawerToggle.syncState();*/
+        drawerToggle.syncState();
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         ViewPager viewPager = (ViewPager) findViewById(R.id.adminViewPager);
         viewPager.setAdapter(new AdminPagerAdapter(getSupportFragmentManager()));
@@ -58,11 +65,11 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
 
     @Override
     public void onBackPressed() {
-        /*if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        } else {*/
+        } else {
             super.onBackPressed();
-        //}
+        }
     }
 
     private class AdminPagerAdapter extends FragmentStatePagerAdapter {
@@ -76,7 +83,7 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
             if (position == 0)
                 return new AdminPanelManager.FragmentNewJob();
             else if (position == 1)
-                return new AdminPanelManager.JobEditor();
+                return new AdminPanelManager.EditJob();
             return new AdminPanelManager.FragmentQueryDB();
         }
 

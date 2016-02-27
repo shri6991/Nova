@@ -1075,6 +1075,7 @@ public class ServerRequests {
 
     private class fetchJobListingsAsync extends AsyncTask<Void, Void, Job[]> {
         String userPosition;
+        int errCode;
         String userExperience;
         GetJobObjectsCallBack getJobObjectsCallBack;
         Job[] returnedJobs;
@@ -1130,9 +1131,9 @@ public class ServerRequests {
                 }
             } catch (Exception e) {
                 if (e instanceof IOException)
-                    Toast.makeText(context, "Connection to server failed", Toast.LENGTH_SHORT).show();
+                    errCode = 1;
                 if (e instanceof JSONException)
-                    negativeAlert("There are no jobs currently matching your profile. Please check again later");
+                    errCode = 2;
                 e.printStackTrace();
             }
             return returnedJobs;
@@ -1141,6 +1142,10 @@ public class ServerRequests {
         @Override
         protected void onPostExecute(Job[] returnedJobs) {
             progressDialog.dismiss();
+            if (errCode == 1)
+                negativeAlert("Connection to server failed. Check your connection and try again");
+            else if (errCode == 2)
+                negativeAlert("There are no jobs currently matching your profile. Please check again later");
             getJobObjectsCallBack.done(returnedJobs);
             super.onPostExecute(returnedJobs);
         }

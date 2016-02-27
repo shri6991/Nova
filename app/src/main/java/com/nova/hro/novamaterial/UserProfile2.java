@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -94,10 +95,10 @@ public class UserProfile2 extends AppCompatActivity implements NavigationView.On
         addcompanylayout = (LinearLayout) findViewById(R.id.addcompanylayout);
 
 
-        position.setText(receivedUser.getPosition());
-        experience.setText(receivedUser.getExperience());
-        curloc.setText(receivedUser.getCurloc());
-        desloc.setText(receivedUser.getDesloc());
+        position.setText(Html.fromHtml("<b>Position Desired: </b>") + receivedUser.getPosition());
+        experience.setText(Html.fromHtml("<b>Experience: </b>") + receivedUser.getExperience());
+        curloc.setText(Html.fromHtml("<b>Current Location: </b>") + receivedUser.getCurloc());
+        desloc.setText(Html.fromHtml("<b>Desired Location: </b>") + receivedUser.getDesloc());
 
         com1name.setText(receivedUser.getCom1name());
         com1pos.setText(receivedUser.getCom1pos());

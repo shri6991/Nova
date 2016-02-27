@@ -217,7 +217,7 @@ public class JobFinder extends AppCompatActivity {
             jobArrayAdapter = new MyJobRecyclerAdapter(arrayJob);
             searchJobListView.setLayoutManager(new LinearLayoutManager(getContext()));
             searchJobListView.setAdapter(jobArrayAdapter);
-            searchJobListView.setHasFixedSize(true);
+            //searchJobListView.setHasFixedSize(true);
             return v;
         }
 
@@ -233,8 +233,6 @@ public class JobFinder extends AppCompatActivity {
                         for (int i = 0; i < returnedJobs.length; i++) {
                             arrayJob.add(i, returnedJobs[i]);
                         }
-                        jobArrayAdapter = new MyJobRecyclerAdapter(arrayJob);
-                        searchJobListView.setAdapter(jobArrayAdapter);
                         jobArrayAdapter.notifyDataSetChanged();
                     }
                 }
