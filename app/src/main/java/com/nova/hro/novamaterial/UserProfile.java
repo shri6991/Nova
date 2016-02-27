@@ -140,6 +140,7 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
 
                 final Bitmap resized = Bitmap.createScaledBitmap(yourBitmap, (yourBitmap.getWidth() / scale), (yourBitmap.getHeight() / scale), true);
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
                 resized.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
 
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
@@ -151,16 +152,16 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
                     public void done(User returnedUser) {
                         if (returnedUser != null) {
                             System.out.println("Not null");
-                            returndecoded = decodeBase64(receivedUser.getImageUri());
                             flag = 10;
+                            returndecoded = decodeBase64(receivedUser.getImageUri());
                             captureImageView.setImageBitmap(resized);
-                            Bitmap resized1 = RoundedImageView.getCroppedBitmap(resized, 35);
+                            Bitmap resized1 = RoundedImageView.getCroppedBitmap(resized, 80);
                             headerImageView.setImageBitmap(resized1);
                         } else
                             Toast.makeText(getApplication(), "Image Update unsuccessful", Toast.LENGTH_LONG).show();
-
                     }
                 });
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -257,7 +258,7 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
         protected void onPostExecute(Void aVoid) {
             if (decoded != null) {
                 captureImageView.setImageBitmap(decoded);
-                decoded = RoundedImageView.getCroppedBitmap(decoded, 35);
+                decoded = RoundedImageView.getCroppedBitmap(decoded, 80);
                 headerImageView.setImageBitmap(decoded);
             } else
                 captureImageView.setImageResource(R.drawable.drawable);

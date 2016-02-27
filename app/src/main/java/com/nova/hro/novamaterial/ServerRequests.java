@@ -402,25 +402,26 @@ public class ServerRequests {
                     System.out.println("response ok");
                     publishProgress(50);
                     InputStream is = new BufferedInputStream(conn.getInputStream());
-                    is.mark(99999999);
-                    BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                    //is.mark(99999999);
+                    //BufferedReader br = new BufferedReader(new InputStreamReader(is));
                     String line;
-                    float c = 0;
-                    float k = 0;
+                    /*float c = 0;
+                    /float k = 0;
                     while (br.readLine() != null) {
                         c++;
                         //System.out.println("\ncounting\n" + c);
                     }
-                    is.reset();
+                    is.reset(); */
                     BufferedReader br1 = new BufferedReader(new InputStreamReader(is));
-                    while (br1.readLine() != null || k < c) {
-                        k++;
+                    while (br1.readLine() != null) {
+                        //k++;
                         line = br1.readLine();
                         //System.out.println("Reading response");
                         serverresponse += line;
-                        publishProgress(50 + (int) ((k / c) * 50));
+                        //publishProgress(50 + (int) ((k / c) * 50));
                         //System.out.print("published progress" + " k,c = " + k + " " + c + "  " + ((int) ((k / c) * 100)) + "\n");
                     }
+                    publishProgress(100);
                     System.out.println("Response = " + serverresponse);
                 }
 
@@ -435,7 +436,6 @@ public class ServerRequests {
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
             progressDialog1.setProgress(values[0]);
-            //System.out.print("\nUpdated progress" + values[0]);
         }
 
         @Override

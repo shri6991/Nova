@@ -177,10 +177,8 @@
                             android:layout_alignParentRight="true"
                             android:layout_marginBottom="5dp"
                             android:layout_marginRight="20dp"
-                            android:clickable="true"
                             android:elevation="0dp"
                             android:text="DISCARD"
-                            android:textColor="@color/colorAccentDark"
                             android:textSize="16sp"
                             android:translationZ="0dp" />
                     </RelativeLayout>
@@ -585,7 +583,6 @@
                                 android:clickable="true"
                                 android:elevation="0dp"
                                 android:text="SAVE"
-                                android:textColor="@color/colorPrimaryDark"
                                 android:textSize="16sp"
                                 android:translationZ="0dp" />
 
@@ -600,7 +597,6 @@
                                 android:clickable="true"
                                 android:elevation="0dp"
                                 android:text="DISCARD"
-                                android:textColor="@color/colorAccentDark"
                                 android:textSize="16sp"
                                 android:translationZ="0dp" />
                         </RelativeLayout>
