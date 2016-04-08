@@ -12,6 +12,20 @@ public class Job {
     private String location;
     private String type;
     private String domain;
+    private String expDate;
+
+
+    public Job(String ID, String domain, String position, String type, String experience, String description, String location, String remarks, String expDate) {
+        this.description = description;
+        this.experience = experience;
+        this.ID = ID;
+        this.type = type;
+        this.location = location;
+        this.position = position;
+        this.remarks = remarks;
+        this.domain = domain;
+        this.expDate = expDate;
+    }
 
     public Job(String ID, String domain, String position, String type, String experience, String description, String location, String remarks) {
         this.description = description;
@@ -91,5 +105,13 @@ public class Job {
 
     public void setDomain(String domain) {
         this.domain = domain;
+    }
+
+    public String getExpDate() {
+        return expDate;
+    }
+
+    public void setExpDate(String expDate) {
+        this.expDate = expDate;
     }
 }

@@ -442,7 +442,6 @@ public class ServerRequests {
         protected void onPostExecute(User user) {
             progressDialog1.dismiss();
             if (serverresponse.equals("") || serverresponse.startsWith("<")) {
-                negativeAlert(CONNECTION_ERROR);
                 userCallBack.done(null);
             } else
                 userCallBack.done(user);
@@ -967,6 +966,8 @@ public class ServerRequests {
         @Override
         protected void onPostExecute(Void aVoid) {
             progressDialog.dismiss();
+            if (serverresponse.equals(""))
+                Toast.makeText(context, CONNECTION_ERROR, Toast.LENGTH_SHORT).show();
             getJobCallBack.done(null);
             super.onPostExecute(aVoid);
         }

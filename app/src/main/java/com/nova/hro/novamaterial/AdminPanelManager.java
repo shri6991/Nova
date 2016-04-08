@@ -327,11 +327,57 @@ public class AdminPanelManager {
                 return jobArray.size();
             }
 
-            public class VH extends RecyclerView.ViewHolder {
+            public class VH extends RecyclerView.ViewHolder implements View.OnClickListener {
                 LinearLayout showJob, editJob;
                 TextView jobID, etjobID, jobType, jobPosition, jobExperience, jobRemarks, jobLocation, jobDescription, jobDomain;
                 EditText etjobPosition, etjobExperience, etjobRemarks, etjobLocation, etjobDescription, etjobDomain;
                 Button bEditJob, bSaveEdit, bDiscardEdit;
+                ImageView imgDeleteJob;
+
+
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+
+                    switch (v.getId()) {
+
+                        case R.id.bSaveEdit:
+                            final Job temp = jobArray.get(position);
+
+                            serverRequests.updateJob(new Job(temp.getID(), etjobDomain.getText().toString(), etjobPosition.getText().toString(), temp.getType(), etjobExperience.getText().toString(), etjobDescription.getText().toString(), etjobLocation.getText().toString(), etjobRemarks.getText().toString()), new GetJobCallBack() {
+                                @Override
+                                public void done(Job returnedJob) {
+                                }
+                            });
+                            editJob.setVisibility(View.GONE);
+                            showJob.setVisibility(View.VISIBLE);
+                            break;
+                        case R.id.bEditJob:
+                            final Job temp1 = jobArray.get(position);
+                            showJob.setVisibility(View.GONE);
+                            editJob.setVisibility(View.VISIBLE);
+                            etjobDescription.setText(temp1.getDescription());
+                            etjobPosition.setText(temp1.getPosition());
+                            etjobRemarks.setText(temp1.getRemarks());
+                            etjobLocation.setText(temp1.getLocation());
+                            etjobDomain.setText(temp1.getDomain());
+                            etjobExperience.setText(temp1.getExperience());
+                            etjobID.setText(temp1.getID());
+                            break;
+
+                        case R.id.bDiscardEdit:
+                            editJob.setVisibility(View.GONE);
+                            showJob.setVisibility(View.VISIBLE);
+                            break;
+
+                        case R.id.imgDeleteJob:
+                            serverRequests.deleteJob(jobID.getText().toString(), new GetJobCallBack() {
+                                @Override
+                                public void done(Job returnedJob) {
+                                }
+                            });
+                    }
+                }
 
                 public VH(View v) {
                     super(v);
@@ -355,42 +401,11 @@ public class AdminPanelManager {
                     bEditJob = (Button) v.findViewById(R.id.bEditJob);
                     bDiscardEdit = (Button) v.findViewById(R.id.bDiscardEdit);
                     bSaveEdit = (Button) v.findViewById(R.id.bSaveEdit);
-                    bEditJob.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            int position = getAdapterPosition();
-                            Job temp = jobArray.get(position);
-                            showJob.setVisibility(View.GONE);
-                            editJob.setVisibility(View.VISIBLE);
-                            etjobDescription.setText(temp.getDescription());
-                            etjobPosition.setText(temp.getPosition());
-                            etjobRemarks.setText(temp.getRemarks());
-                            etjobLocation.setText(temp.getLocation());
-                            etjobDomain.setText(temp.getDomain());
-                            etjobExperience.setText(temp.getExperience());
-                            etjobID.setText(temp.getID());
-                        }
-                    });
-                    bDiscardEdit.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            editJob.setVisibility(View.GONE);
-                            showJob.setVisibility(View.VISIBLE);
-                        }
-                    });
-                    bSaveEdit.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            int position = getAdapterPosition();
-                            final Job temp = jobArray.get(position);
-                            serverRequests.updateJob(new Job(temp.getID(), etjobDomain.getText().toString(), etjobPosition.getText().toString(), temp.getType(), etjobExperience.getText().toString(), etjobDescription.getText().toString(), etjobLocation.getText().toString(), etjobRemarks.getText().toString()), new GetJobCallBack() {
-                                @Override
-                                public void done(Job returnedJob) {
-                                }});
-                            editJob.setVisibility(View.GONE);
-                            showJob.setVisibility(View.VISIBLE);
-                        }
-                    });
+                    imgDeleteJob = (ImageView) v.findViewById(R.id.imgDeleteJob);
+                    bEditJob.setOnClickListener(this);
+                    bSaveEdit.setOnClickListener(this);
+                    bDiscardEdit.setOnClickListener(this);
+                    imgDeleteJob.setOnClickListener(this);
                 }
             }
         }

@@ -31,7 +31,6 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("Administrator Panel");
-
         navView = (NavigationView) findViewById(R.id.nav_drawer);
         navView.setNavigationItemSelectedListener(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_admin);
@@ -40,7 +39,7 @@ public class AdminPanel extends AppCompatActivity implements NavigationView.OnNa
                 toolbar,
                 R.string.drawer_open,
                 R.string.drawer_closed);
-        drawerLayout.setDrawerListener(drawerToggle);
+        drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         ViewPager viewPager = (ViewPager) findViewById(R.id.adminViewPager);

@@ -18,20 +18,20 @@
         <activity
             android:name="com.nova.hro.novamaterial.Login"
             android:label="Nova"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.nova.hro.novamaterial.UserProfile"
-            android:label=" "
+            android:label="User Profile"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.nova.hro.novamaterial.UserProfile2"
-            android:label=" "
+            android:label="User Profile"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.nova.hro.novamaterial.AccountSettings"
@@ -43,7 +43,8 @@
         </activity>
         <activity
             android:name="com.nova.hro.novamaterial.Register"
-            android:label="Registration - Step 1"
+            android:label="Registration"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -55,7 +56,8 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.nova.hro.novamaterial.Register_2"
-            android:label="Registration - Step 2"
+            android:label="Registration"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -63,6 +65,7 @@
         </activity>
         <activity
             android:name="com.nova.hro.novamaterial.JobFinder"
+            android:windowSoftInputMode="stateHidden"
             android:label="Find a Job">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -70,8 +73,10 @@
         </activity>
         <activity
             android:name="com.nova.hro.novamaterial.SavedJobs"
-            android:label="@string/title_activity_saved_jobs"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+            android:label="@string/title_activity_saved_jobs"/>
+
+        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See    https://g.co/AppIndexing/AndroidStudio for more information. -->
 
     </application>
 
