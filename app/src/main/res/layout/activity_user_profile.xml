@@ -1,4 +1,5 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<RelativeLayout
+    xmlns:android="http://schemas.android.m/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -7,7 +8,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        layout_width="wrap_content"
+        layout_height="wrap_content">
 
         <android.support.v7.widget.CardView
             android:id="@+id/profilerel1"
@@ -15,11 +18,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             app:cardCornerRadius="5dp"
-            app:cardElevation="2dp">
+            app:cardElevation="2dp"
+            layout_width="wrap_content"
+            layout_height="wrap_content">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                layout_width="wrap_content"
+                layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/usernamedisplay"
@@ -30,14 +37,18 @@
                     android:text="   Username"
                     android:textColor="@color/Black"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    layout_width="wrap_content"
+                    layout_height="wrap_content" />
 
                 <View
                     android:id="@+id/divider"
                     android:layout_width="fill_parent"
                     android:layout_height="0.5dp"
                     android:layout_below="@id/usernamedisplay"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@android:color/darker_gray"
+                    layout_width="wrap_content"
+                    layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/profileUsername"
@@ -48,7 +59,9 @@
                     android:gravity="center_vertical"
                     android:text="      Username"
                     android:textColor="@color/colorTextPrimary"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    layout_width="wrap_content"
+                    layout_height="wrap_content" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
 
@@ -60,11 +73,15 @@
             android:layout_below="@+id/profilerel1"
             android:layout_margin="10dp"
             app:cardCornerRadius="5dp"
-            app:cardElevation="2dp">
+            app:cardElevation="2dp"
+            layout_width="wrap_content"
+            layout_height="wrap_content">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                layout_width="wrap_content"
+                layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/emaildisplay"
@@ -76,14 +93,18 @@
                     android:text="   Email ID"
                     android:textColor="@color/Black"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    layout_width="wrap_content"
+                    layout_height="wrap_content" />
 
                 <View
                     android:id="@+id/divider2"
                     android:layout_width="fill_parent"
                     android:layout_height="0.5dp"
                     android:layout_below="@id/emaildisplay"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@android:color/darker_gray"
+                    layout_width="wrap_content"
+                    layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/profileEmail"
@@ -94,7 +115,9 @@
                     android:gravity="center_vertical"
                     android:text="      Email ID"
                     android:textColor="@color/colorTextPrimary"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    layout_width="wrap_content"
+                    layout_height="wrap_content" />
 
                 <EditText
                     android:id="@+id/editEmail"
@@ -104,7 +127,9 @@
                     android:layout_marginLeft="2dp"
                     android:layout_marginRight="50dp"
                     android:textSize="17sp"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    layout_width="wrap_content"
+                    layout_height="wrap_content" />
 
                 <ImageView
                     android:id="@+id/imgeditemail"
@@ -114,7 +139,9 @@
                     android:alpha="0.5"
                     android:onClick="editEmail"
                     android:padding="10dp"
-                    android:src="@drawable/ic_mode_edit_black_48dp" />
+                    android:src="@drawable/ic_mode_edit_black_48dp"
+                    layout_width="wrap_content"
+                    layout_height="wrap_content" />
 
                 <ImageView
                     android:id="@+id/imgconfirmemail"
@@ -126,7 +153,9 @@
                     android:clickable="true"
                     android:padding="12dp"
                     android:src="@drawable/ic_offline_pin_black_48dp"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    layout_width="wrap_content"
+                    layout_height="wrap_content" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
 
@@ -137,11 +166,15 @@
             android:layout_below="@+id/profilerel3"
             android:layout_margin="10dp"
             app:cardCornerRadius="5dp"
-            app:cardElevation="2dp">
+            app:cardElevation="2dp"
+            layout_width="wrap_content"
+            layout_height="wrap_content">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                layout_width="wrap_content"
+                layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/agedisplay"
@@ -152,14 +185,18 @@
                     android:text="   Age"
                     android:textColor="@color/Black"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    layout_width="wrap_content"
+                    layout_height="wrap_content" />
 
                 <View
                     android:id="@+id/divider3"
                     android:layout_width="fill_parent"
                     android:layout_height="0.5dp"
                     android:layout_below="@id/agedisplay"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@android:color/darker_gray"
+                    layout_width="wrap_content"
+                    layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/profileAge"
@@ -171,7 +208,9 @@
                     android:gravity="center_vertical"
                     android:text="      Age"
                     android:textColor="@color/colorTextPrimary"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    layout_width="wrap_content"
+                    layout_height="wrap_content" />
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>
@@ -183,11 +222,15 @@
             android:layout_below="@+id/profilerel4"
             android:layout_margin="10dp"
             app:cardCornerRadius="5dp"
-            app:cardElevation="2dp">
+            app:cardElevation="2dp"
+            layout_width="wrap_content"
+            layout_height="wrap_content">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                layout_width="wrap_content"
+                layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/phonedisplay"
@@ -198,14 +241,18 @@
                     android:text="   Phone Number"
                     android:textColor="@color/Black"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    layout_width="wrap_content"
+                    layout_height="wrap_content" />
 
                 <View
                     android:id="@+id/divider4"
                     android:layout_width="fill_parent"
                     android:layout_height="0.5dp"
                     android:layout_below="@id/phonedisplay"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@android:color/darker_gray"
+                    layout_width="wrap_content"
+                    layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/profilePhone"
@@ -216,7 +263,9 @@
                     android:gravity="center_vertical"
                     android:text="      Phone"
                     android:textColor="@color/colorTextPrimary"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    layout_width="wrap_content"
+                    layout_height="wrap_content" />
 
                 <EditText
                     android:id="@+id/editPhone"
@@ -228,7 +277,9 @@
                     android:layout_marginLeft="2dp"
                     android:layout_marginRight="50dp"
                     android:textSize="17sp"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    layout_width="wrap_content"
+                    layout_height="wrap_content" />
 
                 <ImageView
                     android:id="@+id/imgeditphone"
@@ -238,7 +289,9 @@
                     android:alpha="0.5"
                     android:onClick="editPhone"
                     android:padding="10dp"
-                    android:src="@drawable/ic_mode_edit_black_48dp" />
+                    android:src="@drawable/ic_mode_edit_black_48dp"
+                    layout_width="wrap_content"
+                    layout_height="wrap_content" />
 
                 <ImageView
                     android:id="@+id/imgconfirmphone"
@@ -250,8 +303,13 @@
                     android:clickable="true"
                     android:padding="12dp"
                     android:src="@drawable/ic_offline_pin_black_48dp"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    layout_width="wrap_content"
+                    layout_height="wrap_content" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
     </RelativeLayout>
-</RelativeLayout>
+</RelativeLayout> -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />

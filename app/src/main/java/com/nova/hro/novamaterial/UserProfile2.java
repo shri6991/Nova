@@ -139,13 +139,7 @@ public class UserProfile2 extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
-        if (!menuItem.isChecked()) {
-            menuItem.setChecked(true);
-            menuItem.setEnabled(true);
-        } else {
-            menuItem.setChecked(false);
-            menuItem.setEnabled(false);
-        }
+        menuItem.setChecked(true);
         switch (menuItem.getItemId()) {
             case R.id.item_personal:
                 startActivity(new Intent(this, UserProfile.class));
@@ -161,6 +155,8 @@ public class UserProfile2 extends AppCompatActivity implements NavigationView.On
             case R.id.item_logout:
                 userLocalStore.logOutUser();
                 startActivity(new Intent(this, Login.class));
+            case R.id.aboutUs:
+                startActivity(new Intent(this, AboutUsActivity.class));
         }
         return true;
     }

@@ -72,7 +72,7 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
                 toolbar,
                 R.string.drawer_open,
                 R.string.drawer_closed);
-        drawerLayout.setDrawerListener(drawerToggle);
+        drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
         new importimageasync().execute();
         captureImageView = (ImageView) findViewById(R.id.img);
@@ -93,11 +93,7 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
         if (!menuItem.isChecked()) {
             menuItem.setChecked(true);
             menuItem.setEnabled(true);
-        } else {
-            menuItem.setChecked(false);
-            menuItem.setEnabled(false);
         }
-
 
         switch (menuItem.getItemId()) {
             case R.id.item_professional:
@@ -115,6 +111,8 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
                 userLocalStore.logOutUser();
                 startActivity(new Intent(this, Login.class));
                 break;
+            case R.id.aboutUs:
+                startActivity(new Intent(this, AboutUsActivity.class));
         }
         return true;
     }

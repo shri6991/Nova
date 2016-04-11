@@ -421,7 +421,7 @@
                 android:elevation="0dp"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="Nova HRO is a Mumbai headquartered Staffing, Recruiting, RPO and Outsourcing company established by professionals who have been in the business for over a decade and have a combined experience of over 100 man years in the industry. The team comprises of professionally qualified people – in business management, marketing, education, finance, consulting and experience across industry sectors."
+                android:text=""
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:translationZ="0dp"
