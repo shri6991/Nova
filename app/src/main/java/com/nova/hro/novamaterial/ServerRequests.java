@@ -45,6 +45,7 @@ public class ServerRequests {
         progressDialog = new ProgressDialog(context);
         progressDialog1 = new ProgressDialog(context);
         progressDialog1.setIndeterminate(false);
+        progressDialog1.setCancelable(false);
         progressDialog1.setTitle("Uploading image");
         progressDialog1.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setTitle("Processing");
