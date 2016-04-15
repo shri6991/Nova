@@ -1,7 +1,10 @@
 package com.nova.hro.novamaterial;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -9,16 +12,15 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class AboutUsActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCallback {
     SupportMapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about_us);
+        setContentView(R.layout.activity_contact_us);
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
@@ -36,8 +38,15 @@ public class AboutUsActivity extends AppCompatActivity implements OnMapReadyCall
                 "IndiaTel: +9122 4123 8052"));
     }
 
-    @Override
-    public boolean onMarkerClick(Marker marker) {
-        return false;
+    public void launchWebsite(View v) {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://novahro.com")));
     }
+
+    public void contactCall(View v) {
+        startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:+9168886888")));
+    }
+
+    public void contactEmail(View v) {
+    }
+
 }

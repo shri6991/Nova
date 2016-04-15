@@ -156,7 +156,7 @@ public class UserProfile2 extends AppCompatActivity implements NavigationView.On
                 userLocalStore.logOutUser();
                 startActivity(new Intent(this, Login.class));
             case R.id.aboutUs:
-                startActivity(new Intent(this, AboutUsActivity.class));
+                startActivity(new Intent(this, ContactUsActivity.class));
         }
         return true;
     }

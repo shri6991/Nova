@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -88,7 +89,7 @@
      App Indexing.  See    https://g.co/AppIndexing/AndroidStudio for more information.
         -->
 
-        <activity android:name=".AboutUsActivity"></activity>
+        <activity android:name=".ContactUsActivity"></activity>
     </application>
 
 </manifest>

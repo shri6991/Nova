@@ -112,7 +112,7 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
                 startActivity(new Intent(this, Login.class));
                 break;
             case R.id.aboutUs:
-                startActivity(new Intent(this, AboutUsActivity.class));
+                startActivity(new Intent(this, ContactUsActivity.class));
         }
         return true;
     }
