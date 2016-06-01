@@ -371,6 +371,7 @@ public class AdminPanelManager {
                             break;
 
                         case R.id.imgDeleteJob:
+                            new Animations().setSwipeRight(showJob);
                             serverRequests.deleteJob(jobID.getText().toString(), new GetJobCallBack() {
                                 @Override
                                 public void done(Job returnedJob) {

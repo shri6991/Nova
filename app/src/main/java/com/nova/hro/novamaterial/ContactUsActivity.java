@@ -1,5 +1,7 @@
 package com.nova.hro.novamaterial;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -43,7 +45,7 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
     }
 
     public void contactCall(View v) {
-        startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:+9168886888")));
+        //startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:+9168886888")));
     }
 
     public void contactEmail(View v) {

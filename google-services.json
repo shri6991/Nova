@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1083584862666",
+    "firebase_url": "https://novahro.firebaseio.com",
+    "project_id": "project-1951686612667564154",
+    "storage_bucket": "project-1951686612667564154.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083584862666:android:0fe8149352fd1a23",
+        "android_client_info": {
+          "package_name": "com.nova.hro.novamaterial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083584862666-61u7bre5ohlfe1rb8j3ar6psgl62map1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfstRVtvmm0s9IkqtaOHFhCmkWcRma2xA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

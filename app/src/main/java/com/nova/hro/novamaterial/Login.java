@@ -1,28 +1,46 @@
 package com.nova.hro.novamaterial;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.GoogleAuthUtil;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.Api;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Random;
 
-public class Login extends AppCompatActivity implements View.OnClickListener {
+public class Login extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     UserLocalStore userLocalStore;
     TextView regbutton;
     String email;
+    GoogleSignInOptions gso;
+    GoogleApiClient googleApiClient;
+    User userToLogin;
     ServerRequests serverRequests;
     EditText etun, etpass, resetEmail, resetUsername;
     Button blogin, resetButton;
+    Context context;
     String username, password = "";
 
     private static String randomPasswordGenerate() {
@@ -41,10 +59,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_login);
-
+        context = this.getApplicationContext();
+        setupGoogleSignIn();
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         serverRequests = new ServerRequests(this);
         userLocalStore = new UserLocalStore(this);
-
         if (authenticateifLoggedIn()) {
             startActivity(new Intent(this, UserProfile.class));
         }
@@ -95,9 +114,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 username = etun.getText().toString();
                 password = etpass.getText().toString();
                 //If user wants to continue being logged in
-                User user = new User(username, password);
+                userToLogin = new User(username, password);
                 //Select corresponding user from the database after passing username(ONLINE DB)
-                serverRequests.fetchUserDatafromBackground(user, new GetUserCallBack() {
+                serverRequests.fetchUserDatafromBackground(userToLogin, new GetUserCallBack() {
                     @Override
                     public void done(User returnedUser) {
                         if (returnedUser == null) ;
@@ -178,4 +197,33 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         });
     }
 
+    public void setupGoogleSignIn() {
+
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
+        Intent gLogin = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+        startActivityForResult(gLogin, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            if (result.isSuccess()) {
+                GoogleSignInAccount account = result.getSignInAccount();
+                String userEmail = account.getEmail();
+                String scope = "oauth2: profile email";
+                try {
+                    String token = GoogleAuthUtil.getToken(Login.this, userEmail, scope);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 }
